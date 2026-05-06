@@ -4,11 +4,11 @@ import { Onboarding } from './components/Onboarding';
 import { useOnboarding } from './hooks/useOnboarding';
 
 function AppWithOnboarding() {
-  const { showOnboarding } = useOnboarding();
+  const { showOnboarding, complete } = useOnboarding();
   return (
     <>
       <RouterProvider router={router} />
-      {showOnboarding && <Onboarding />}
+      {showOnboarding && <Onboarding onComplete={complete} />}
     </>
   );
 }

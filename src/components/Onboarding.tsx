@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button } from './ui/Button';
-import { useOnboarding } from '../hooks/useOnboarding';
 
 const SLIDES = [
   {
@@ -25,15 +24,14 @@ const SLIDES = [
   },
 ] as const;
 
-export function Onboarding() {
-  const { complete } = useOnboarding();
+export function Onboarding({ onComplete }: { onComplete: () => void }) {
   const [index, setIndex] = useState(0);
   const slide = SLIDES[index];
   const isLast = index === SLIDES.length - 1;
 
   const next = () => {
     if (isLast) {
-      complete();
+      onComplete();
     } else {
       setIndex((i) => i + 1);
     }
@@ -80,7 +78,7 @@ export function Onboarding() {
           {!isLast && (
             <button
               type="button"
-              onClick={complete}
+              onClick={onComplete}
               className="py-1 text-sm text-muted hover:text-ink"
             >
               Overslaan
