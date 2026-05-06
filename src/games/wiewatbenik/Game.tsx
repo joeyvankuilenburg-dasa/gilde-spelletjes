@@ -54,24 +54,6 @@ export default function WieWatBenIkGame() {
         <p className="text-sm text-muted">{wieWatBenIkGame.description}</p>
       </header>
 
-      {/* Hoe werkt het */}
-      <Card className="p-4">
-        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
-          Hoe werkt het?
-        </p>
-        <ul className="flex flex-col gap-1.5">
-          {wieWatBenIkGame.howToPlay.map((step, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-ink">
-              <span
-                aria-hidden="true"
-                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-              />
-              {step}
-            </li>
-          ))}
-        </ul>
-      </Card>
-
       {/* Categorie filter */}
       <div className="flex flex-col gap-2">
         <p className="text-xs font-bold uppercase tracking-widest text-muted">Categorie</p>
@@ -198,6 +180,24 @@ export default function WieWatBenIkGame() {
           </span>
         </div>
       )}
+
+      {/* Hoe werkt het */}
+      <Card className="p-4">
+        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
+          Hoe werkt het?
+        </p>
+        <ul className="flex flex-col gap-1.5">
+          {wieWatBenIkGame.howToPlay.map((step, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink">
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </Card>
     </div>
   );
 }

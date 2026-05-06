@@ -52,24 +52,6 @@ export default function WoordenwebGame() {
         <p className="text-sm text-muted">{woordenwebGame.description}</p>
       </header>
 
-      {/* Hoe werkt het */}
-      <Card className="p-4">
-        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
-          Hoe werkt het?
-        </p>
-        <ul className="flex flex-col gap-1.5">
-          {woordenwebGame.howToPlay.map((step, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-ink">
-              <span
-                aria-hidden="true"
-                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-              />
-              {step}
-            </li>
-          ))}
-        </ul>
-      </Card>
-
       <LevelPicker value={level} onChange={setLevel} />
 
       {/* Woordkaart */}
@@ -133,6 +115,24 @@ export default function WoordenwebGame() {
           </span>
         )}
       </div>
+
+      {/* Hoe werkt het */}
+      <Card className="p-4">
+        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
+          Hoe werkt het?
+        </p>
+        <ul className="flex flex-col gap-1.5">
+          {woordenwebGame.howToPlay.map((step, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink">
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </Card>
     </div>
   );
 }
