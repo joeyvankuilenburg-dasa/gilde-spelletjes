@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Fris & Strak – GSSL brand tokens ───────────────────────────────────── */
 :root {
-  --gssl-primary: 220 90% 35%;
+  --gssl-primary: 213 68% 32%; /* #1B4F8A – diep Gilde-blauw            */
   --gssl-primary-fg: 0 0% 100%;
-  --gssl-accent: 35 95% 55%;
-  --gssl-accent-fg: 220 25% 15%;
-  --gssl-bg: 40 40% 98%;
+  --gssl-accent: 170 63% 46%; /* #2BBFA0 – fris mint                   */
+  --gssl-accent-fg: 0 0% 100%;
+  --gssl-bg: 214 36% 96%; /* #F0F4F8 – licht grijsblauw            */
   --gssl-surface: 0 0% 100%;
-  --gssl-text: 220 25% 15%;
-  --gssl-muted: 220 10% 45%;
-  --gssl-border: 220 15% 88%;
+  --gssl-text: 213 34% 15%; /* #1A2433 – donkerblauw                 */
+  --gssl-muted: 213 20% 52%;
+  --gssl-border: 213 28% 89%;
 }
 
 html {
@@ -34,7 +35,21 @@ body {
 }
 
 *:focus-visible {
-  @apply outline-none ring-4 ring-primary/40;
+  @apply outline-none ring-4 ring-accent/50;
+}
+
+/* Material Symbols baseline */
+.material-symbols-rounded {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

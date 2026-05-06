@@ -13,15 +13,22 @@ export default function OnderwerpenGame() {
 
   useEffect(() => {
     if (filtered.length > 0) pick();
-    // pick once when the filtered list changes (level switch); intentionally not in deps to avoid loops
+    // pick once when level changes; intentionally omitted from deps to avoid re-pick loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered]);
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Onderwerpen</h1>
-        <p className="text-muted">Druk op de knop voor een willekeurig gespreksonderwerp.</p>
+      <header className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 text-primary">
+          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+            forum
+          </span>
+          <h1 className="text-2xl font-bold tracking-tight">Onderwerpen</h1>
+        </div>
+        <p className="text-sm text-muted">
+          Druk op de knop voor een willekeurig gespreksonderwerp.
+        </p>
       </header>
 
       <LevelPicker value={level} onChange={setLevel} />
@@ -37,7 +44,10 @@ export default function OnderwerpenGame() {
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button size="lg" onClick={pick} disabled={filtered.length === 0}>
+        <Button variant="accent" size="lg" onClick={pick} disabled={filtered.length === 0}>
+          <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
+            shuffle
+          </span>
           Volgend onderwerp
         </Button>
         <span className="text-sm text-muted" aria-live="polite">

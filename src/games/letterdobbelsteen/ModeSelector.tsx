@@ -20,7 +20,7 @@ export function ModeSelector({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-bold uppercase tracking-wide text-muted">Spel</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-muted">Spel</span>
         <div role="radiogroup" aria-label="Kies een spelmodus" className="grid grid-cols-2 gap-2">
           {SUB_MODES.map((mode) => {
             const selected = mode.id === selectedMode.id;
@@ -48,7 +48,7 @@ export function ModeSelector({
 
       {selectedMode.needsTheme ? (
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-bold uppercase tracking-wide text-muted">Thema</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-muted">Thema</span>
           <div role="radiogroup" aria-label="Kies een thema" className="flex flex-wrap gap-2">
             {THEMES.map((theme) => {
               const selected = theme.id === selectedTheme.id;

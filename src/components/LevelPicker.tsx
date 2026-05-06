@@ -10,11 +10,11 @@ interface LevelPickerProps {
 export function LevelPicker({ value, onChange, className }: LevelPickerProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <span className="text-sm font-bold uppercase tracking-wide text-muted">Taalniveau</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-muted">Taalniveau</span>
       <div
         role="radiogroup"
         aria-label="Kies taalniveau"
-        className="inline-flex rounded-full border border-border bg-surface p-1"
+        className="inline-flex rounded-xl border border-border bg-bg p-1"
       >
         {LEVELS.map((level) => {
           const selected = level === value;
@@ -26,8 +26,10 @@ export function LevelPicker({ value, onChange, className }: LevelPickerProps) {
               aria-checked={selected}
               onClick={() => onChange(level)}
               className={cn(
-                'min-h-tap min-w-tap flex-1 rounded-full px-4 text-base font-bold transition-colors',
-                selected ? 'bg-primary text-primary-fg shadow-sm' : 'text-ink hover:bg-ink/5',
+                'min-h-tap min-w-tap flex-1 rounded-lg px-4 text-base font-bold transition-all duration-150',
+                selected
+                  ? 'bg-primary text-primary-fg shadow-sm'
+                  : 'text-muted hover:bg-surface hover:text-ink',
               )}
             >
               {level}

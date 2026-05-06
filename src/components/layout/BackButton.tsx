@@ -4,21 +4,12 @@ export function BackButton() {
   return (
     <Link
       to="/"
-      className="inline-flex min-h-tap min-w-tap items-center gap-2 rounded-full px-3 text-base font-bold text-ink hover:bg-ink/5"
+      className="hover:bg-primary/8 inline-flex min-h-tap min-w-tap items-center gap-1.5 rounded-xl px-3 text-base font-bold text-ink hover:text-primary"
       aria-label="Terug naar overzicht"
     >
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-6 w-6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M15 18l-6-6 6-6" />
-      </svg>
+      <span className="material-symbols-rounded text-[20px]" aria-hidden="true">
+        arrow_back
+      </span>
       Terug
     </Link>
   );

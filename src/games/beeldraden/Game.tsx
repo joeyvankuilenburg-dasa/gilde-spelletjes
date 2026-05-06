@@ -26,9 +26,14 @@ export default function BeeldradenGame() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Beeldraden</h1>
-        <p className="text-muted">
+      <header className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 text-primary">
+          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+            image
+          </span>
+          <h1 className="text-2xl font-bold tracking-tight">Beeldraden</h1>
+        </div>
+        <p className="text-sm text-muted">
           Beschrijf samen wat je op de foto ziet. Hulp nodig? Toon de hint.
         </p>
       </header>
@@ -63,7 +68,10 @@ export default function BeeldradenGame() {
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button size="lg" onClick={pick} disabled={filtered.length === 0}>
+        <Button variant="accent" size="lg" onClick={pick} disabled={filtered.length === 0}>
+          <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
+            shuffle
+          </span>
           Volgende foto
         </Button>
         <span className="text-sm text-muted" aria-live="polite">

@@ -19,13 +19,19 @@ export default {
         sans: ['"Atkinson Hyperlegible"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        card: '1rem',
+        card: '14px',
       },
       minHeight: {
         tap: '48px',
       },
       minWidth: {
         tap: '48px',
+      },
+      boxShadow: {
+        card: '0 2px 12px rgba(27,79,138,.07), 0 0 0 1px rgba(27,79,138,.07)',
+        'card-hover': '0 6px 24px rgba(27,79,138,.13), 0 0 0 2px rgba(43,191,160,.45)',
+        die: '0 8px 32px rgba(27,79,138,.18)',
+        'die-rolling': '0 8px 40px rgba(43,191,160,.35), 0 0 0 3px rgba(43,191,160,.3)',
       },
       keyframes: {
         shake: {
@@ -39,10 +45,15 @@ export default {
           '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        'slide-up': {
+          '0%': { transform: 'translateY(8px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
       },
       animation: {
         shake: 'shake 0.7s ease-in-out',
         pop: 'pop 0.25s ease-out',
+        'slide-up': 'slide-up 0.3s ease-out',
       },
     },
   },

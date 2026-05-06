@@ -35,9 +35,14 @@ export default function LetterDobbelsteenGame() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Letter-dobbelsteen</h1>
-        <p className="text-muted">
+      <header className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 text-primary">
+          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+            casino
+          </span>
+          <h1 className="text-2xl font-bold tracking-tight">Letter-dobbelsteen</h1>
+        </div>
+        <p className="text-sm text-muted">
           Kies een spel, eventueel een thema, en tik op de dobbelsteen om te rollen.
         </p>
       </header>

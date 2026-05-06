@@ -17,18 +17,27 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function FaceVisual({ face }: { face: DieFace }) {
+function FaceVisual({ face, rolling }: { face: DieFace; rolling: boolean }) {
   if (face.kind === 'wild') {
     return (
-      <div className="flex flex-col items-center">
-        <span aria-hidden="true" className="text-6xl">
+      <div className="flex flex-col items-center gap-1">
+        <span aria-hidden="true" className="text-5xl">
           ⭐
         </span>
-        <span className="text-xs font-bold uppercase tracking-wide text-muted">Wild</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-accent">Wild</span>
       </div>
     );
   }
-  return <span className="text-7xl font-extrabold leading-none text-ink">{face.value}</span>;
+  return (
+    <span
+      className={cn(
+        'font-extrabold leading-none transition-colors duration-150',
+        rolling ? 'text-5xl text-muted' : 'text-7xl text-primary',
+      )}
+    >
+      {face.value}
+    </span>
+  );
 }
 
 export function Die({ onRoll, disabled }: DieProps) {
@@ -77,12 +86,12 @@ export function Die({ onRoll, disabled }: DieProps) {
       disabled={disabled || rolling}
       aria-label="Rol de dobbelsteen"
       className={cn(
-        'flex h-48 w-48 select-none items-center justify-center rounded-3xl border-4 border-ink/10 bg-surface shadow-lg transition-transform',
+        'flex h-52 w-52 select-none items-center justify-center rounded-3xl bg-surface transition-all duration-200',
         'hover:-translate-y-1 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60',
-        rolling && 'animate-shake',
+        rolling ? 'animate-shake shadow-die-rolling' : 'shadow-die hover:shadow-card-hover',
       )}
     >
-      <FaceVisual face={display} />
+      <FaceVisual face={display} rolling={rolling} />
     </button>
   );
 }
