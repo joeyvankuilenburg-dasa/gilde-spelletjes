@@ -1,0 +1,188 @@
+import type { Spreekwoord } from '../../types/content';
+
+export const SPREEKWOORDEN: Spreekwoord[] = [
+  // ── A2 ──────────────────────────────────────────────────────────────────
+  {
+    id: 'sp-a2-oefening',
+    text: 'Oefening baart kunst.',
+    meaning: 'Door veel te oefenen word je beter in iets.',
+    example: 'Je Nederlands wordt steeds beter — oefening baart kunst!',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-laat',
+    text: 'Beter laat dan nooit.',
+    meaning: 'Het is beter om iets te laat te doen dan helemaal niet.',
+    example: 'Hij stuurde de brief een week te laat, maar beter laat dan nooit.',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-waagt',
+    text: 'Wie niet waagt, wie niet wint.',
+    meaning: 'Als je niets probeert, kun je ook niets bereiken.',
+    example: 'Ze was bang om te solliciteren, maar wie niet waagt, wie niet wint.',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-thuis',
+    text: 'Zoals het klokje thuis tikt, tikt het nergens.',
+    meaning: 'Je voelt je nergens zo goed als thuis.',
+    example: 'Na drie weken vakantie was ze blij terug te zijn — zoals het klokje thuis tikt.',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-leugen',
+    text: 'Leugens hebben korte benen.',
+    meaning: 'Een leugen kom je niet ver mee; de waarheid komt altijd boven water.',
+    example:
+      'Hij zei dat hij ziek was, maar zijn collega zag hem in de stad — leugens hebben korte benen.',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-geld',
+    text: 'Geld maakt niet gelukkig.',
+    meaning: 'Rijk zijn maakt je niet automatisch gelukkig.',
+    example: 'Hij had alles, maar voelde zich leeg — geld maakt niet gelukkig.',
+    levels: ['A2'],
+  },
+  {
+    id: 'sp-a2-morgen',
+    text: 'Stel niet uit tot morgen wat je vandaag kunt doen.',
+    meaning: 'Doe dingen meteen en wacht niet te lang.',
+    example: 'Begin nu met leren — stel niet uit tot morgen wat je vandaag kunt doen.',
+    levels: ['A2', 'B1'],
+  },
+
+  // ── B1 ──────────────────────────────────────────────────────────────────
+  {
+    id: 'sp-b1-appel',
+    text: 'De appel valt niet ver van de boom.',
+    meaning: 'Een kind lijkt veel op zijn ouders in gedrag of karakter.',
+    example: 'Zijn dochter is ook musicus geworden — de appel valt niet ver van de boom.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-handen',
+    text: 'Vele handen maken licht werk.',
+    meaning: 'Als je iets samen doet met meerdere mensen, is het minder zwaar.',
+    example: 'Met het hele team was de verhuizing snel klaar — vele handen maken licht werk.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-deur',
+    text: 'Met de deur in huis vallen.',
+    meaning: 'Direct over het onderwerp beginnen zonder er omheen te draaien.',
+    example: 'Ik val maar meteen met de deur in huis: ik wil je om een gunst vragen.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-storm',
+    text: 'Een storm in een glas water.',
+    meaning: 'Veel ophef maken over iets wat eigenlijk niet zo belangrijk is.',
+    example: 'Ze maakten ruzie over de kleur van de muren — een echte storm in een glas water.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-kat',
+    text: 'De kat op het spek binden.',
+    meaning: 'Iemand de kans geven om iets te doen wat hij eigenlijk niet mag of zou moeten doen.',
+    example:
+      'De snoepjes voor de kinderen bewaken en ze daarna alleen laten is de kat op het spek binden.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-schaap',
+    text: 'Het schaap met de vijf poten zoeken.',
+    meaning: 'Iemand of iets zoeken dat aan onmogelijk hoge eisen voldoet.',
+    example:
+      'Ze willen een medewerker die alles kan — ze zijn het schaap met de vijf poten aan het zoeken.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-maan',
+    text: 'Naar de maan zijn.',
+    meaning: 'Verloren, kapot, of compleet mislukt zijn.',
+    example: 'Mijn telefoon is gevallen en het scherm is naar de maan.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-worst',
+    text: 'Iemand iets door de neus boren.',
+    meaning: 'Iemand iets afpakken of afhouden waar hij recht op had.',
+    example: 'Zij had de baan bijna, maar een ander boorde het haar door de neus.',
+    levels: ['B1'],
+  },
+  {
+    id: 'sp-b1-paard',
+    text: 'Niet op één paard wedden.',
+    meaning: 'Je kansen niet alleen op één mogelijkheid zetten.',
+    example: 'Solliciteer bij meerdere bedrijven — wed niet op één paard.',
+    levels: ['B1', 'B2'],
+  },
+  {
+    id: 'sp-b1-lachen',
+    text: 'Lachen is de beste medicijn.',
+    meaning: 'Humor en vrolijkheid helpen je om je beter te voelen.',
+    example: 'Na een zware dag deed een grappige film wonderen — lachen is de beste medicijn.',
+    levels: ['B1'],
+  },
+
+  // ── B2 ──────────────────────────────────────────────────────────────────
+  {
+    id: 'sp-b2-wijn',
+    text: 'Goede wijn behoeft geen krans.',
+    meaning: 'Iets wat echt goed is, heeft geen reclame of aanbeveling nodig.',
+    example: 'Dat restaurant zit altijd vol zonder advertenties — goede wijn behoeft geen krans.',
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-ezel',
+    text: 'Een ezel stoot zich in het algemeen niet twee keer aan dezelfde steen.',
+    meaning: 'Een verstandig persoon maakt dezelfde fout niet twee keer.',
+    example: 'Na die mislukking pas ik mijn aanpak aan — een ezel stoot zich niet twee keer.',
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-voordeel',
+    text: "Elk voordeel heb z'n nadeel.",
+    meaning: 'Aan elk voordeel zit ook een keerzijde.',
+    example: "Thuiswerken is fijn, maar je mist het sociale contact — elk voordeel heb z'n nadeel.",
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-kleine',
+    text: 'Wie het kleine niet eert, is het grote niet weerd.',
+    meaning: 'Je moet ook de kleine dingen waarderen, niet alleen de grote.',
+    example:
+      'Bedank ook voor kleine attenties — wie het kleine niet eert, is het grote niet weerd.',
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-vis',
+    text: 'Grote vissen eten kleine vissen.',
+    meaning: 'De machtigen profiteren ten koste van de zwakkeren.',
+    example: 'Het kleine bedrijf werd opgekocht — grote vissen eten kleine vissen.',
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-vlieg',
+    text: 'Twee vliegen in één klap slaan.',
+    meaning: 'Met één actie twee dingen tegelijk bereiken.',
+    example: 'Door de fiets te nemen sport ik én spaar ik benzine — twee vliegen in één klap.',
+    levels: ['B1', 'B2'],
+  },
+  {
+    id: 'sp-b2-regen',
+    text: 'Van de regen in de drup komen.',
+    meaning: 'Van een slechte situatie in een nog slechtere situatie belanden.',
+    example: 'Hij stopte met die baan, maar de nieuwe was nog erger — van de regen in de drup.',
+    levels: ['B2'],
+  },
+  {
+    id: 'sp-b2-steen',
+    text: 'De eerste steen werpen.',
+    meaning: 'Als eerste iemand bekritiseren of aanvallen.',
+    example: 'Niemand durft de eerste steen te werpen want ze hebben allemaal fouten gemaakt.',
+    levels: ['B2'],
+  },
+];

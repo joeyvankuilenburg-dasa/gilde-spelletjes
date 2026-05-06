@@ -44,3 +44,20 @@ export interface WordPrompt {
   emoji?: string;
   levels: Level[];
 }
+
+export type WieWatCategory = 'Beroep' | 'Dier' | 'Voorwerp' | 'Persoon' | 'Eten' | 'Plek';
+
+export interface WieWatCard {
+  id: string;
+  word: string;
+  category: WieWatCategory;
+  emoji?: string;
+}
+
+export interface Spreekwoord {
+  id: string;
+  text: string;
+  meaning: string;
+  example?: string;
+  levels: Level[];
+}

@@ -6,7 +6,9 @@ export type GameId =
   | 'beeldraden'
   | 'letterdobbelsteen'
   | 'situaties'
-  | 'woordenweb';
+  | 'woordenweb'
+  | 'wiewatbenik'
+  | 'spreekwoorden';
 
 export type GameTag =
   | 'Spreken'
