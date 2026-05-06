@@ -7,8 +7,14 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
+import { LEVELS } from '../../types/content';
+import type { Level } from '../../types/content';
 import { beeldradenGame } from './meta';
 import { IMAGE_PROMPTS } from './images';
+
+const comingSoonLevels: Level[] = LEVELS.filter(
+  (l) => IMAGE_PROMPTS.filter((img) => img.levels.includes(l)).length === 0,
+);
 
 export default function BeeldradenGame() {
   const [level, setLevel] = useLevelFilter();
@@ -45,7 +51,7 @@ export default function BeeldradenGame() {
         <p className="text-sm text-muted">{beeldradenGame.description}</p>
       </header>
 
-      <LevelPicker value={level} onChange={setLevel} />
+      <LevelPicker value={level} onChange={setLevel} comingSoonLevels={comingSoonLevels} />
 
       {/* Fotokaart */}
       <Card
@@ -93,7 +99,16 @@ export default function BeeldradenGame() {
             </div>
           </div>
         ) : (
-          <p className="p-8 text-center text-muted">Geen afbeeldingen voor dit niveau.</p>
+          <div className="flex flex-col items-center gap-3 p-10 text-center">
+            <span className="material-symbols-rounded text-[48px] text-muted/40" aria-hidden="true">
+              hourglass_empty
+            </span>
+            <p className="text-base font-bold text-ink">Binnenkort beschikbaar</p>
+            <p className="text-sm text-muted">
+              We voegen nog foto's toe voor niveau {level}. Kies een ander niveau om verder te
+              spelen.
+            </p>
+          </div>
         )}
       </Card>
 
