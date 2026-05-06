@@ -138,7 +138,12 @@ export default function WieWatBenIkGame() {
       {/* Actieknoppen na onthulling */}
       {revealed && current && (
         <div className="flex gap-3">
-          <Button variant="accent" size="lg" className="flex-1" onClick={() => handleNext(true)}>
+          <Button
+            variant="accent"
+            size="lg"
+            className="flex-1 px-3"
+            onClick={() => handleNext(true)}
+          >
             <span className="material-symbols-rounded text-[20px]" aria-hidden="true">
               check_circle
             </span>
@@ -147,7 +152,7 @@ export default function WieWatBenIkGame() {
           <Button
             variant="secondary"
             size="lg"
-            className="flex-1"
+            className="flex-1 px-3"
             onClick={() => handleNext(false)}
           >
             <span className="material-symbols-rounded text-[20px]" aria-hidden="true">
