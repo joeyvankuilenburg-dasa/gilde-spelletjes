@@ -18,19 +18,11 @@ export default function HomePage() {
   const visibleGames = activeTag ? GAMES.filter((g) => g.tag === activeTag) : GAMES;
 
   return (
-    <div className="flex flex-col gap-8">
-      {/* Hero */}
-      <header className="flex flex-col gap-3 rounded-card bg-primary p-6 text-primary-fg shadow-die">
-        <div className="flex items-center gap-3">
-          <span className="material-symbols-rounded text-[32px] text-accent" aria-hidden="true">
-            translate
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight">GSSL Spelletjes</h1>
-        </div>
-        <p className="text-base leading-relaxed text-primary-fg/80">
-          Kies een spel om samen mee te starten. Geen voorbereiding nodig.
-        </p>
-        <div className="flex flex-wrap gap-2 pt-1" role="group" aria-label="Filter op type">
+    <div className="flex flex-col gap-6">
+      {/* Filter */}
+      <div className="flex flex-col gap-2">
+        <p className="text-xs font-bold uppercase tracking-widest text-muted">Filter op type</p>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter op type">
           {TAGS.map((t) => {
             const isActive = activeTag === t;
             return (
@@ -41,8 +33,8 @@ export default function HomePage() {
                 aria-pressed={isActive}
                 className={
                   isActive
-                    ? 'rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary'
-                    : 'rounded-full bg-primary-fg/10 px-2.5 py-1 text-xs font-bold text-primary-fg/80 hover:bg-primary-fg/20'
+                    ? 'rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-fg'
+                    : 'rounded-full bg-surface px-3 py-1.5 text-xs font-bold text-muted shadow-card hover:text-ink'
                 }
               >
                 {t}
@@ -50,7 +42,7 @@ export default function HomePage() {
             );
           })}
         </div>
-      </header>
+      </div>
 
       {/* Spelletjes */}
       <section aria-label="Beschikbare spelletjes">
