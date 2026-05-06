@@ -1,7 +1,7 @@
 import type { Topic } from '../../types/content';
 
 export const TOPICS: Topic[] = [
-  // A1 — heel eenvoudig, dagelijkse dingen
+  // ── A1 — heel eenvoudig, dagelijkse dingen ──────────────────────────────
   { id: 't-a1-01', text: 'Wat heb je vandaag ontbeten?', levels: ['A1'] },
   { id: 't-a1-02', text: 'Welke kleur vind je mooi?', levels: ['A1'] },
   { id: 't-a1-03', text: 'Hoe groot is je familie?', levels: ['A1'] },
@@ -12,8 +12,23 @@ export const TOPICS: Topic[] = [
   { id: 't-a1-08', text: 'Hoe ga je naar de winkel?', levels: ['A1'] },
   { id: 't-a1-09', text: 'Welke dag van de week vind je het fijnst?', levels: ['A1'] },
   { id: 't-a1-10', text: 'Wat draag je vandaag?', levels: ['A1'] },
+  { id: 't-a1-11', text: 'Heb je broers of zussen?', levels: ['A1'] },
+  { id: 't-a1-12', text: 'Welk fruit eet je graag?', levels: ['A1'] },
+  { id: 't-a1-13', text: 'Wat drink je bij het ontbijt?', levels: ['A1'] },
+  { id: 't-a1-14', text: 'Heb je een fiets?', levels: ['A1'] },
+  { id: 't-a1-15', text: "Wat doe je 's ochtends als eerste?", levels: ['A1'] },
+  { id: 't-a1-16', text: 'Welke groente eet je niet zo graag?', levels: ['A1'] },
+  { id: 't-a1-17', text: 'Wat is jouw favoriete seizoen?', levels: ['A1'] },
+  { id: 't-a1-18', text: 'Hoe laat sta jij op?', levels: ['A1'] },
+  { id: 't-a1-19', text: 'Welke taal spreek jij thuis?', levels: ['A1'] },
+  { id: 't-a1-20', text: 'Heb je een huisdier?', levels: ['A1'] },
+  { id: 't-a1-21', text: 'Wat eet je graag als snack?', levels: ['A1'] },
+  { id: 't-a1-22', text: 'Ga je graag naar buiten of blijf je liever binnen?', levels: ['A1'] },
+  { id: 't-a1-23', text: 'Welke sport vind je leuk?', levels: ['A1'] },
+  { id: 't-a1-24', text: 'Wat is jouw favoriete nummer of liedje?', levels: ['A1'] },
+  { id: 't-a1-25', text: 'Hoe kom jij naar de taalles?', levels: ['A1'] },
 
-  // A2
+  // ── A2 — eenvoudig, wat meer uitleg nodig ───────────────────────────────
   { id: 't-a2-01', text: 'Vertel over je laatste vakantie.', levels: ['A2'] },
   { id: 't-a2-02', text: 'Wat is je favoriete plek in Leiden?', levels: ['A2'] },
   { id: 't-a2-03', text: 'Wat doe je graag in je vrije tijd?', levels: ['A2'] },
@@ -24,8 +39,27 @@ export const TOPICS: Topic[] = [
   { id: 't-a2-08', text: 'Welke muziek luister je graag?', levels: ['A2'] },
   { id: 't-a2-09', text: 'Wat zou je graag willen leren?', levels: ['A2'] },
   { id: 't-a2-10', text: 'Beschrijf je huis: hoe ziet het eruit?', levels: ['A2'] },
+  { id: 't-a2-11', text: 'Wat maak je graag klaar in de keuken?', levels: ['A2'] },
+  { id: 't-a2-12', text: 'Hoe vier jij je verjaardag?', levels: ['A2'] },
+  { id: 't-a2-13', text: 'Welke winkels ga jij het meest naar?', levels: ['A2'] },
+  { id: 't-a2-14', text: 'Wat doe jij als het regent buiten?', levels: ['A2'] },
+  { id: 't-a2-15', text: 'Hoe ziet je dagelijkse routine eruit?', levels: ['A2'] },
+  { id: 't-a2-16', text: 'Wat vind jij het fijnste aan Nederland?', levels: ['A2'] },
+  { id: 't-a2-17', text: 'Waar zou jij naartoe willen reizen?', levels: ['A2'] },
+  { id: 't-a2-18', text: 'Wat is jouw favoriete plek om te ontspannen?', levels: ['A2'] },
+  { id: 't-a2-19', text: 'Hoe houd jij je gezond?', levels: ['A2'] },
+  { id: 't-a2-20', text: 'Wat vind je moeilijk aan het Nederlands?', levels: ['A2'] },
+  { id: 't-a2-21', text: 'Beschrijf je buren: wie zijn ze?', levels: ['A2'] },
+  { id: 't-a2-22', text: 'Welke apps gebruik je het meest op je telefoon?', levels: ['A2'] },
+  { id: 't-a2-23', text: 'Wat is jouw favoriete gerecht om te maken?', levels: ['A2'] },
+  { id: 't-a2-24', text: 'Wat doe je graag op een vrije middag?', levels: ['A2'] },
+  {
+    id: 't-a2-25',
+    text: 'Vertel over iets wat je onlangs voor het eerst hebt geprobeerd.',
+    levels: ['A2'],
+  },
 
-  // B1
+  // ── B1 — gevorderd, langere antwoorden verwacht ──────────────────────────
   { id: 't-b1-01', text: 'Wat mis je het meest uit je geboorteland?', levels: ['B1'] },
   { id: 't-b1-02', text: 'Wat is een gewoonte in Nederland die je opvalt?', levels: ['B1'] },
   { id: 't-b1-03', text: 'Vertel over een mooi moment van vorige week.', levels: ['B1'] },
@@ -36,8 +70,47 @@ export const TOPICS: Topic[] = [
   { id: 't-b1-08', text: 'Vertel over een feestdag die jij viert.', levels: ['B1'] },
   { id: 't-b1-09', text: 'Wat zou je veranderen aan je dagelijkse routine?', levels: ['B1'] },
   { id: 't-b1-10', text: 'Wat doe je als je je een keer somber voelt?', levels: ['B1'] },
+  { id: 't-b1-11', text: 'Wat maakt een buurt prettig om in te wonen?', levels: ['B1'] },
+  {
+    id: 't-b1-12',
+    text: 'Vertel over een traditie in jouw cultuur die jij bijzonder vindt.',
+    levels: ['B1'],
+  },
+  { id: 't-b1-13', text: 'Hoe belangrijk is religie in jouw dagelijkse leven?', levels: ['B1'] },
+  { id: 't-b1-14', text: 'Vertel over iemand die jou heeft geïnspireerd.', levels: ['B1'] },
+  {
+    id: 't-b1-15',
+    text: 'Hoe heb je je eerste vrienden in Nederland leren kennen?',
+    levels: ['B1'],
+  },
+  { id: 't-b1-16', text: 'Wat verwacht jij van de toekomst?', levels: ['B1'] },
+  { id: 't-b1-17', text: 'Wat is voor jou een goede dag?', levels: ['B1'] },
+  { id: 't-b1-18', text: 'Hoe ga jij om met stress?', levels: ['B1'] },
+  { id: 't-b1-19', text: 'Wat zijn de voordelen van in een ander land wonen?', levels: ['B1'] },
+  {
+    id: 't-b1-20',
+    text: 'Hoe denk jij over werk en vrije tijd: is de balans goed?',
+    levels: ['B1'],
+  },
+  {
+    id: 't-b1-21',
+    text: 'Welk advies zou jij geven aan iemand die net in Nederland aankomt?',
+    levels: ['B1'],
+  },
+  { id: 't-b1-22', text: 'Wat neem je altijd mee op vakantie, en waarom?', levels: ['B1'] },
+  {
+    id: 't-b1-23',
+    text: 'Hoe is het schoolsysteem hier anders dan in jouw thuisland?',
+    levels: ['B1'],
+  },
+  {
+    id: 't-b1-24',
+    text: 'Vertel over een moment waarop je iets moeilijks hebt overwonnen.',
+    levels: ['B1'],
+  },
+  { id: 't-b1-25', text: 'Wat doet jou glimlachen als je een slechte dag hebt?', levels: ['B1'] },
 
-  // B2
+  // ── B2 — vloeiend, abstractere onderwerpen ───────────────────────────────
   {
     id: 't-b2-01',
     text: 'Welk verschil tussen Nederland en je geboorteland vind je het grootst?',
@@ -59,7 +132,7 @@ export const TOPICS: Topic[] = [
     text: 'Wat zou je willen meegeven aan iemand die net in Nederland is?',
     levels: ['B2'],
   },
-  { id: 't-b2-06', text: 'Wat betekent “thuis” voor jou?', levels: ['B2'] },
+  { id: 't-b2-06', text: 'Wat betekent "thuis" voor jou?', levels: ['B2'] },
   {
     id: 't-b2-07',
     text: 'Welke gewoonte zou je graag willen veranderen, en waarom?',
@@ -76,4 +149,51 @@ export const TOPICS: Topic[] = [
     levels: ['B2'],
   },
   { id: 't-b2-10', text: 'Welke eigenschap waardeer je het meest in mensen?', levels: ['B2'] },
+  { id: 't-b2-11', text: 'Hoe beïnvloedt taal de manier waarop je denkt?', levels: ['B2'] },
+  { id: 't-b2-12', text: 'Wat betekent integratie voor jou in de praktijk?', levels: ['B2'] },
+  {
+    id: 't-b2-13',
+    text: 'Beschrijf een moment waarop je je echt begrepen voelde in Nederland.',
+    levels: ['B2'],
+  },
+  {
+    id: 't-b2-14',
+    text: 'Welke maatschappelijke kwestie houdt jou het meest bezig?',
+    levels: ['B2'],
+  },
+  {
+    id: 't-b2-15',
+    text: 'Wat verlies je als je een nieuwe taal leert — en wat win je?',
+    levels: ['B2'],
+  },
+  {
+    id: 't-b2-16',
+    text: 'Beschrijf hoe jouw identiteit veranderd is door in Nederland te wonen.',
+    levels: ['B2'],
+  },
+  { id: 't-b2-17', text: 'Wat vind je van hoe Nederland omgaat met diversiteit?', levels: ['B2'] },
+  {
+    id: 't-b2-18',
+    text: 'Op welk moment voelde je je voor het eerst echt thuis in Nederland?',
+    levels: ['B2'],
+  },
+  { id: 't-b2-19', text: 'Hoe verandert een land door migratie?', levels: ['B2'] },
+  { id: 't-b2-20', text: 'Wat wil je bereiken in de komende vijf jaar?', levels: ['B2'] },
+  { id: 't-b2-21', text: 'Hoe zou je jezelf beschrijven in drie woorden?', levels: ['B2'] },
+  {
+    id: 't-b2-22',
+    text: 'Welk boek, film of verhaal heeft jou gevormd als persoon?',
+    levels: ['B2'],
+  },
+  {
+    id: 't-b2-23',
+    text: 'Wat is voor jou het verschil tussen eerlijk zijn en kwetsend zijn?',
+    levels: ['B2'],
+  },
+  { id: 't-b2-24', text: 'Hoe denk jij over vrijheid: wat zijn de grenzen ervan?', levels: ['B2'] },
+  {
+    id: 't-b2-25',
+    text: 'Hoe kijk jij aan tegen de rol van de overheid in het dagelijkse leven?',
+    levels: ['B2'],
+  },
 ];

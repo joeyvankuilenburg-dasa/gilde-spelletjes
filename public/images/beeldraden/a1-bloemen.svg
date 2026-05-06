@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Kleurrijke bloemen in een vaas op een tafel">
+  <rect width="800" height="600" fill="#fef9c3"/>
+  <!-- tafel -->
+  <rect x="0" y="440" width="800" height="160" fill="#d97706"/>
+  <rect x="0" y="430" width="800" height="18" fill="#b45309"/>
+  <!-- vaas -->
+  <ellipse cx="400" cy="450" rx="60" ry="18" fill="#1d4ed8"/>
+  <path d="M340,450 Q330,380 360,360 L440,360 Q470,380 460,450 Z" fill="#2563eb"/>
+  <ellipse cx="400" cy="362" rx="42" ry="12" fill="#1d4ed8"/>
+  <!-- stengels -->
+  <line x1="400" y1="360" x2="370" y2="200" stroke="#16a34a" stroke-width="5"/>
+  <line x1="400" y1="360" x2="400" y2="150" stroke="#16a34a" stroke-width="5"/>
+  <line x1="400" y1="360" x2="430" y2="190" stroke="#16a34a" stroke-width="5"/>
+  <line x1="400" y1="360" x2="340" y2="250" stroke="#16a34a" stroke-width="4"/>
+  <line x1="400" y1="360" x2="460" y2="240" stroke="#16a34a" stroke-width="4"/>
+  <!-- bladeren -->
+  <ellipse cx="355" cy="290" rx="22" ry="10" fill="#22c55e" transform="rotate(-30,355,290)"/>
+  <ellipse cx="445" cy="295" rx="22" ry="10" fill="#22c55e" transform="rotate(30,445,295)"/>
+  <!-- bloem 1 – rood -->
+  <circle cx="370" cy="200" r="42" fill="#ef4444"/>
+  <circle cx="370" cy="200" r="20" fill="#fde047"/>
+  <circle cx="345" cy="175" r="18" fill="#ef4444"/>
+  <circle cx="395" cy="175" r="18" fill="#ef4444"/>
+  <circle cx="345" cy="225" r="18" fill="#ef4444"/>
+  <circle cx="395" cy="225" r="18" fill="#ef4444"/>
+  <!-- bloem 2 – geel -->
+  <circle cx="400" cy="148" r="42" fill="#fde047"/>
+  <circle cx="400" cy="148" r="20" fill="#f97316"/>
+  <circle cx="375" cy="123" r="18" fill="#fde047"/>
+  <circle cx="425" cy="123" r="18" fill="#fde047"/>
+  <circle cx="375" cy="173" r="18" fill="#fde047"/>
+  <circle cx="425" cy="173" r="18" fill="#fde047"/>
+  <!-- bloem 3 – roze -->
+  <circle cx="432" cy="190" r="38" fill="#f9a8d4"/>
+  <circle cx="432" cy="190" r="18" fill="#fde047"/>
+  <circle cx="410" cy="168" r="16" fill="#f9a8d4"/>
+  <circle cx="454" cy="168" r="16" fill="#f9a8d4"/>
+  <circle cx="410" cy="212" r="16" fill="#f9a8d4"/>
+  <circle cx="454" cy="212" r="16" fill="#f9a8d4"/>
+  <!-- bloem 4 – paars klein -->
+  <circle cx="338" cy="252" r="28" fill="#a855f7"/>
+  <circle cx="338" cy="252" r="13" fill="#fde047"/>
+  <!-- bloem 5 – oranje klein -->
+  <circle cx="463" cy="242" r="28" fill="#f97316"/>
+  <circle cx="463" cy="242" r="13" fill="#fde047"/>
+</svg>
