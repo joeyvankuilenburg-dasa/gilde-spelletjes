@@ -1,35 +1,22 @@
-import { useEffect, useMemo, useState } from 'react';
-import { LevelPicker } from '../../components/LevelPicker';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
-import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
-import { useLevelFilter } from '../../hooks/useLevelFilter';
+import { Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
-import { LEVELS } from '../../types/content';
-import type { Level } from '../../types/content';
 import { beeldradenGame } from './meta';
 import { IMAGE_PROMPTS } from './images';
 
-const comingSoonLevels: Level[] = LEVELS.filter(
-  (l) => IMAGE_PROMPTS.filter((img) => img.levels.includes(l)).length === 0,
-);
-
 export default function BeeldradenGame() {
-  const [level, setLevel] = useLevelFilter();
-  const filtered = useMemo(
-    () => IMAGE_PROMPTS.filter((img) => img.levels.includes(level)),
-    [level],
-  );
-  const { current, pick, remaining } = useNoRepeatPicker(filtered);
+  const { current, pick, remaining } = useNoRepeatPicker(IMAGE_PROMPTS);
   const { phase, flip } = useCardFlip();
   const [hintShown, setHintShown] = useState(false);
 
   useEffect(() => {
-    if (filtered.length > 0) pick();
+    pick();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filtered]);
+  }, []);
 
   useEffect(() => {
     setHintShown(false);
@@ -51,8 +38,6 @@ export default function BeeldradenGame() {
         <p className="text-sm text-muted">{beeldradenGame.description}</p>
       </header>
 
-      <LevelPicker value={level} onChange={setLevel} comingSoonLevels={comingSoonLevels} />
-
       {/* Fotokaart */}
       <Card
         className={cn(
@@ -63,17 +48,12 @@ export default function BeeldradenGame() {
       >
         {current ? (
           <div key={current.id} className="animate-pop">
-            <div className="relative">
-              <img
-                src={current.src}
-                alt={current.alt}
-                className="aspect-[4/3] w-full object-cover"
-                loading="eager"
-              />
-              <div className="absolute left-3 top-3">
-                <LevelBadge level={level} />
-              </div>
-            </div>
+            <img
+              src={current.src}
+              alt={current.alt}
+              className="aspect-[4/3] w-full object-cover"
+              loading="eager"
+            />
             <div className="flex flex-col gap-3 p-5">
               {hintShown && current.hintCaption ? (
                 <div className="flex items-start gap-2 rounded-xl bg-accent/10 p-3">
@@ -99,26 +79,12 @@ export default function BeeldradenGame() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-3 p-10 text-center">
-            <span className="material-symbols-rounded text-[48px] text-muted/40" aria-hidden="true">
-              hourglass_empty
-            </span>
-            <p className="text-base font-bold text-ink">Binnenkort beschikbaar</p>
-            <p className="text-sm text-muted">
-              We voegen nog foto's toe voor niveau {level}. Kies een ander niveau om verder te
-              spelen.
-            </p>
-          </div>
+          <p className="p-8 text-center text-muted">Geen afbeeldingen beschikbaar.</p>
         )}
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button
-          variant="accent"
-          size="lg"
-          onClick={() => flip(pick)}
-          disabled={filtered.length === 0}
-        >
+        <Button variant="accent" size="lg" onClick={() => flip(pick)}>
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
             shuffle
           </span>
@@ -131,8 +97,7 @@ export default function BeeldradenGame() {
               visibility_off
             </span>
             {remaining} ongezien
-          </Chip>{' '}
-          op niveau {level}.
+          </Chip>
         </span>
       </div>
 
