@@ -4,15 +4,38 @@
 
 /* ─── Fris & Strak – GSSL brand tokens ───────────────────────────────────── */
 :root {
-  --gssl-primary: 213 68% 32%; /* #1B4F8A – diep Gilde-blauw            */
+  --gssl-primary: 213 68% 32%;
   --gssl-primary-fg: 0 0% 100%;
-  --gssl-accent: 170 63% 46%; /* #2BBFA0 – fris mint                   */
+  --gssl-accent: 170 63% 46%;
   --gssl-accent-fg: 0 0% 100%;
-  --gssl-bg: 214 36% 96%; /* #F0F4F8 – licht grijsblauw            */
+  --gssl-bg: 214 36% 96%;
   --gssl-surface: 0 0% 100%;
-  --gssl-text: 213 34% 15%; /* #1A2433 – donkerblauw                 */
+  --gssl-text: 213 34% 15%;
   --gssl-muted: 213 20% 52%;
   --gssl-border: 213 28% 89%;
+
+  --shadow-card: 0 2px 12px rgba(27, 79, 138, 0.07), 0 0 0 1px rgba(27, 79, 138, 0.07);
+  --shadow-card-hover: 0 6px 24px rgba(27, 79, 138, 0.13), 0 0 0 2px rgba(43, 191, 160, 0.45);
+  --shadow-die: 0 8px 32px rgba(27, 79, 138, 0.18);
+  --shadow-die-rolling: 0 8px 40px rgba(43, 191, 160, 0.35), 0 0 0 3px rgba(43, 191, 160, 0.3);
+}
+
+/* ─── Dark mode ───────────────────────────────────────────────────────────── */
+[data-theme='dark'] {
+  --gssl-primary: 213 70% 60%;
+  --gssl-primary-fg: 0 0% 100%;
+  --gssl-accent: 170 55% 52%;
+  --gssl-accent-fg: 0 0% 100%;
+  --gssl-bg: 213 30% 10%;
+  --gssl-surface: 213 28% 15%;
+  --gssl-text: 213 15% 92%;
+  --gssl-muted: 213 15% 55%;
+  --gssl-border: 213 25% 24%;
+
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-card-hover: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(43, 191, 160, 0.5);
+  --shadow-die: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-die-rolling: 0 8px 40px rgba(43, 191, 160, 0.4), 0 0 0 3px rgba(43, 191, 160, 0.35);
 }
 
 html {

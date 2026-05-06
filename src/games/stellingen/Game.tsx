@@ -5,6 +5,8 @@ import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
+import { useCardFlip } from '../../hooks/useCardFlip';
+import { cn } from '../../lib/cn';
 import { stellingenGame } from './meta';
 import { STATEMENTS } from './data';
 
@@ -12,6 +14,7 @@ export default function StellingenGame() {
   const [level, setLevel] = useLevelFilter();
   const filtered = useMemo(() => STATEMENTS.filter((s) => s.levels.includes(level)), [level]);
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
+  const { phase, flip } = useCardFlip();
 
   useEffect(() => {
     if (filtered.length > 0) pick();
@@ -55,7 +58,13 @@ export default function StellingenGame() {
       <LevelPicker value={level} onChange={setLevel} />
 
       {/* Contentkaart */}
-      <Card className="flex min-h-[200px] flex-col items-center justify-center gap-4 p-8 text-center">
+      <Card
+        className={cn(
+          'flex min-h-[200px] flex-col items-center justify-center gap-4 p-8 text-center',
+          phase === 'out' && 'animate-flip-out',
+          phase === 'in' && 'animate-flip-in',
+        )}
+      >
         {current ? (
           <>
             <p key={current.id} className="animate-pop text-2xl font-bold leading-snug text-ink">
@@ -69,7 +78,12 @@ export default function StellingenGame() {
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button variant="accent" size="lg" onClick={pick} disabled={filtered.length === 0}>
+        <Button
+          variant="accent"
+          size="lg"
+          onClick={() => flip(pick)}
+          disabled={filtered.length === 0}
+        >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
             shuffle
           </span>

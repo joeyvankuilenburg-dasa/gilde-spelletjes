@@ -20,6 +20,18 @@
       rel="stylesheet"
     />
     <title>GSSL Spelletjes</title>
+    <!-- Anti-FOUC: theme vóór eerste render instellen -->
+    <script>
+      (function () {
+        try {
+          var stored = JSON.parse(localStorage.getItem('"gssl.theme"') || '"system"');
+          var dark =
+            stored === 'dark' ||
+            (stored === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

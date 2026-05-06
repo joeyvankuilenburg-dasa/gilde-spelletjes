@@ -28,10 +28,10 @@ export default {
         tap: '48px',
       },
       boxShadow: {
-        card: '0 2px 12px rgba(27,79,138,.07), 0 0 0 1px rgba(27,79,138,.07)',
-        'card-hover': '0 6px 24px rgba(27,79,138,.13), 0 0 0 2px rgba(43,191,160,.45)',
-        die: '0 8px 32px rgba(27,79,138,.18)',
-        'die-rolling': '0 8px 40px rgba(43,191,160,.35), 0 0 0 3px rgba(43,191,160,.3)',
+        card: 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
+        die: 'var(--shadow-die)',
+        'die-rolling': 'var(--shadow-die-rolling)',
       },
       keyframes: {
         shake: {
@@ -49,11 +49,26 @@ export default {
           '0%': { transform: 'translateY(8px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        'flip-out': {
+          '0%': { transform: 'perspective(600px) rotateY(0deg)' },
+          '100%': { transform: 'perspective(600px) rotateY(90deg)' },
+        },
+        'flip-in': {
+          '0%': { transform: 'perspective(600px) rotateY(-90deg)' },
+          '100%': { transform: 'perspective(600px) rotateY(0deg)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         shake: 'shake 0.7s ease-in-out',
         pop: 'pop 0.25s ease-out',
         'slide-up': 'slide-up 0.3s ease-out',
+        'flip-out': 'flip-out 180ms ease-in forwards',
+        'flip-in': 'flip-in 180ms ease-out',
+        'fade-in': 'fade-in 0.3s ease-out',
       },
     },
   },

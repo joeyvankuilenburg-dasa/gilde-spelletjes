@@ -5,6 +5,8 @@ import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
+import { useCardFlip } from '../../hooks/useCardFlip';
+import { cn } from '../../lib/cn';
 import { beeldradenGame } from './meta';
 import { IMAGE_PROMPTS } from './images';
 
@@ -15,6 +17,7 @@ export default function BeeldradenGame() {
     [level],
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
+  const { phase, flip } = useCardFlip();
   const [hintShown, setHintShown] = useState(false);
 
   useEffect(() => {
@@ -63,7 +66,13 @@ export default function BeeldradenGame() {
       <LevelPicker value={level} onChange={setLevel} />
 
       {/* Fotokaart */}
-      <Card className="overflow-hidden p-0">
+      <Card
+        className={cn(
+          'overflow-hidden p-0',
+          phase === 'out' && 'animate-flip-out',
+          phase === 'in' && 'animate-flip-in',
+        )}
+      >
         {current ? (
           <div key={current.id} className="animate-pop">
             <div className="relative">
@@ -107,7 +116,12 @@ export default function BeeldradenGame() {
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button variant="accent" size="lg" onClick={pick} disabled={filtered.length === 0}>
+        <Button
+          variant="accent"
+          size="lg"
+          onClick={() => flip(pick)}
+          disabled={filtered.length === 0}
+        >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
             shuffle
           </span>
