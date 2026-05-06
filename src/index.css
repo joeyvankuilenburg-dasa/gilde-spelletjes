@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gssl-primary: 220 90% 35%;
+  --gssl-primary-fg: 0 0% 100%;
+  --gssl-accent: 35 95% 55%;
+  --gssl-accent-fg: 220 25% 15%;
+  --gssl-bg: 40 40% 98%;
+  --gssl-surface: 0 0% 100%;
+  --gssl-text: 220 25% 15%;
+  --gssl-muted: 220 10% 45%;
+  --gssl-border: 220 15% 88%;
+}
+
+html {
+  font-size: 18px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-ink antialiased;
+  font-family:
+    'Atkinson Hyperlegible',
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+*:focus-visible {
+  @apply outline-none ring-4 ring-primary/40;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

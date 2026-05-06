@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Een marktkraam met groente en fruit">
+  <rect width="800" height="600" fill="#bfdbfe"/>
+  <rect y="460" width="800" height="140" fill="#a3a3a3"/>
+  <rect x="100" y="320" width="600" height="160" fill="#fbbf24" stroke="#1f2937" stroke-width="5"/>
+  <rect x="80" y="200" width="640" height="40" fill="#fef08a" stroke="#1f2937" stroke-width="4"/>
+  <line x1="120" y1="240" x2="120" y2="320" stroke="#1f2937" stroke-width="6"/>
+  <line x1="680" y1="240" x2="680" y2="320" stroke="#1f2937" stroke-width="6"/>
+  <line x1="80" y1="200" x2="40" y2="160" stroke="#1f2937" stroke-width="6"/>
+  <line x1="720" y1="200" x2="760" y2="160" stroke="#1f2937" stroke-width="6"/>
+  <circle cx="200" cy="360" r="22" fill="#dc2626"/>
+  <circle cx="240" cy="350" r="22" fill="#dc2626"/>
+  <circle cx="220" cy="380" r="22" fill="#dc2626"/>
+  <circle cx="350" cy="360" r="22" fill="#22c55e"/>
+  <circle cx="390" cy="350" r="22" fill="#22c55e"/>
+  <circle cx="370" cy="380" r="22" fill="#22c55e"/>
+  <ellipse cx="500" cy="370" rx="28" ry="22" fill="#f97316"/>
+  <ellipse cx="540" cy="360" rx="28" ry="22" fill="#f97316"/>
+  <ellipse cx="520" cy="395" rx="28" ry="22" fill="#f97316"/>
+  <rect x="600" y="340" width="60" height="60" fill="#a78bfa" stroke="#1f2937" stroke-width="3"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Een fiets in een straat">
+  <rect width="800" height="600" fill="#fde68a"/>
+  <rect y="420" width="800" height="180" fill="#a3a3a3"/>
+  <line x1="0" y1="430" x2="800" y2="430" stroke="#737373" stroke-width="3"/>
+  <circle cx="280" cy="430" r="80" fill="none" stroke="#1f2937" stroke-width="10"/>
+  <circle cx="520" cy="430" r="80" fill="none" stroke="#1f2937" stroke-width="10"/>
+  <line x1="280" y1="430" x2="420" y2="320" stroke="#1f2937" stroke-width="10"/>
+  <line x1="420" y1="320" x2="520" y2="430" stroke="#1f2937" stroke-width="10"/>
+  <line x1="280" y1="430" x2="420" y2="430" stroke="#1f2937" stroke-width="10"/>
+  <line x1="420" y1="320" x2="370" y2="430" stroke="#1f2937" stroke-width="10"/>
+  <rect x="395" y="290" width="60" height="20" fill="#1f2937"/>
+  <line x1="370" y1="430" x2="280" y2="430" stroke="#1f2937" stroke-width="10"/>
+  <circle cx="370" cy="430" r="6" fill="#1f2937"/>
+  <line x1="320" y1="280" x2="380" y2="280" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+  <line x1="350" y1="280" x2="350" y2="320" stroke="#1f2937" stroke-width="8"/>
+</svg>

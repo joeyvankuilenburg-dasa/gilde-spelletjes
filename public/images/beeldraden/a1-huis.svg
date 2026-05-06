@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Een huis met een rode deur">
+  <rect width="800" height="600" fill="#bae6fd"/>
+  <rect y="450" width="800" height="150" fill="#86efac"/>
+  <rect x="220" y="280" width="360" height="240" fill="#fef3c7" stroke="#1f2937" stroke-width="6"/>
+  <polygon points="200,280 600,280 400,160" fill="#dc2626" stroke="#1f2937" stroke-width="6"/>
+  <rect x="360" y="380" width="80" height="140" fill="#dc2626" stroke="#1f2937" stroke-width="6"/>
+  <circle cx="425" cy="450" r="6" fill="#1f2937"/>
+  <rect x="260" y="320" width="60" height="60" fill="#bae6fd" stroke="#1f2937" stroke-width="5"/>
+  <rect x="480" y="320" width="60" height="60" fill="#bae6fd" stroke="#1f2937" stroke-width="5"/>
+  <line x1="290" y1="320" x2="290" y2="380" stroke="#1f2937" stroke-width="3"/>
+  <line x1="260" y1="350" x2="320" y2="350" stroke="#1f2937" stroke-width="3"/>
+  <line x1="510" y1="320" x2="510" y2="380" stroke="#1f2937" stroke-width="3"/>
+  <line x1="480" y1="350" x2="540" y2="350" stroke="#1f2937" stroke-width="3"/>
+  <circle cx="650" cy="120" r="50" fill="#fde047"/>
+</svg>
