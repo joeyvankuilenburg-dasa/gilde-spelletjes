@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { Game } from '../types';
+import { HubIcon } from '../icons';
 
 export const woordenwebGame: Game = {
   id: 'woordenweb',
@@ -15,7 +16,7 @@ export const woordenwebGame: Game = {
     'Na 60 seconden tellen jullie de woorden.',
     'Wie heeft er de meeste? Vergelijk en bespreek de woorden.',
   ],
-  icon: () => null,
+  icon: HubIcon,
   supportsLevels: true,
   Component: lazy(() => import('./Game')),
 };

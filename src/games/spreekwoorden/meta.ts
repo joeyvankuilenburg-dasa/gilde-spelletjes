@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { Game } from '../types';
+import { QuoteIcon } from '../icons';
 
 export const spreekwoordenGame: Game = {
   id: 'spreekwoorden',
@@ -15,7 +16,7 @@ export const spreekwoordenGame: Game = {
     'Tik op "Toon betekenis" om de uitleg te zien.',
     'Ken jij een vergelijkbaar spreekwoord uit jouw taal?',
   ],
-  icon: () => null,
+  icon: QuoteIcon,
   supportsLevels: true,
   Component: lazy(() => import('./Game')),
 };

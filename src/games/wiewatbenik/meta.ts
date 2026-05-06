@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import type { Game } from '../types';
+import { PsychologyIcon } from '../icons';
 
 export const wieWatBenIkGame: Game = {
   id: 'wiewatbenik',
@@ -15,7 +16,7 @@ export const wieWatBenIkGame: Game = {
     'Speler A stelt ja/nee-vragen: "Ben ik een dier?", "Leef ik nog?"',
     'Na het raden: tik op "Geraden!" of "Overgeslagen" voor de volgende kaart.',
   ],
-  icon: () => null,
+  icon: PsychologyIcon,
   supportsLevels: false,
   Component: lazy(() => import('./Game')),
 };

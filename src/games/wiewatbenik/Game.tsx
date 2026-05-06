@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { GameTagBadge, Chip } from '../../components/ui/Badge';
@@ -31,6 +31,11 @@ export default function WieWatBenIkGame() {
     [activeCategory],
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
+
+  useEffect(() => {
+    if (filtered.length > 0) pick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered]);
 
   const handleNext = (wasGuessed: boolean) => {
     void wasGuessed;
