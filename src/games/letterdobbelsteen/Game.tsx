@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Card } from '../../components/ui/Card';
+import { GameTagBadge } from '../../components/ui/Badge';
 import { Die } from './Die';
 import type { DieFace } from './faces';
 import { ModeSelector } from './ModeSelector';
@@ -7,6 +8,7 @@ import { SUB_MODES } from './modes';
 import type { SubMode } from './modes';
 import { THEMES } from './themes';
 import type { DiceTheme } from '../../types/content';
+import { letterDobbelsteenGame } from './meta';
 
 export default function LetterDobbelsteenGame() {
   const [mode, setMode] = useState<SubMode>(SUB_MODES[0]!);
@@ -35,17 +37,37 @@ export default function LetterDobbelsteenGame() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-primary">
-          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
-            casino
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight">Letter-dobbelsteen</h1>
+      {/* Header */}
+      <header className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-primary">
+            <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+              casino
+            </span>
+            <h1 className="text-2xl font-bold tracking-tight">Letter-dobbelsteen</h1>
+          </div>
+          <GameTagBadge tag={letterDobbelsteenGame.tag} />
         </div>
-        <p className="text-sm text-muted">
-          Kies een spel, eventueel een thema, en tik op de dobbelsteen om te rollen.
-        </p>
+        <p className="text-sm text-muted">{letterDobbelsteenGame.description}</p>
       </header>
+
+      {/* Hoe werkt het */}
+      <Card className="p-4">
+        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
+          Hoe werkt het?
+        </p>
+        <ul className="flex flex-col gap-1.5">
+          {letterDobbelsteenGame.howToPlay.map((step, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink">
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </Card>
 
       <ModeSelector
         selectedMode={mode}
@@ -54,12 +76,14 @@ export default function LetterDobbelsteenGame() {
         onSelectTheme={handleSelectTheme}
       />
 
-      <div className="flex flex-col items-center gap-4 py-2">
+      {/* Dobbelsteen */}
+      <div className="flex flex-col items-center gap-3 py-2">
         <Die onRoll={handleRoll} />
-        <span className="text-sm text-muted">Tik op de dobbelsteen om te rollen.</span>
+        <p className="text-sm text-muted">Tik op de dobbelsteen om te rollen.</p>
       </div>
 
-      <Card className="min-h-[120px] p-6 text-center">
+      {/* Resultaat */}
+      <Card className="min-h-[100px] p-6 text-center">
         {prompt ? (
           <p
             key={`${mode.id}-${lastFace?.kind}-${lastFace?.kind === 'letter' ? lastFace.value : 'wild'}`}
@@ -68,7 +92,12 @@ export default function LetterDobbelsteenGame() {
             {prompt}
           </p>
         ) : (
-          <p className="text-muted">Rol om een letter en opdracht te krijgen.</p>
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-muted">Rol om een letter en opdracht te krijgen.</p>
+            <p className="text-xs text-muted">
+              Huidige modus: <span className="font-bold text-ink">{mode.label}</span>
+            </p>
+          </div>
         )}
       </Card>
     </div>

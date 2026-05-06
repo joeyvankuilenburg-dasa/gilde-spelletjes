@@ -2,8 +2,10 @@ import { useEffect, useMemo } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
+import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
+import { stellingenGame } from './meta';
 import { STATEMENTS } from './data';
 
 export default function StellingenGame() {
@@ -18,25 +20,49 @@ export default function StellingenGame() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-primary">
-          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
-            balance
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight">Stellingen &amp; dilemma's</h1>
+      {/* Header */}
+      <header className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-primary">
+            <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+              balance
+            </span>
+            <h1 className="text-2xl font-bold tracking-tight">Stellingen &amp; dilemma's</h1>
+          </div>
+          <GameTagBadge tag={stellingenGame.tag} />
         </div>
-        <p className="text-sm text-muted">
-          Wat vind jij? Lees de stelling en geef ieder je eigen antwoord.
-        </p>
+        <p className="text-sm text-muted">{stellingenGame.description}</p>
       </header>
+
+      {/* Hoe werkt het */}
+      <Card className="p-4">
+        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
+          Hoe werkt het?
+        </p>
+        <ul className="flex flex-col gap-1.5">
+          {stellingenGame.howToPlay.map((step, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink">
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </Card>
 
       <LevelPicker value={level} onChange={setLevel} />
 
-      <Card className="flex min-h-[220px] flex-col items-center justify-center gap-4 p-8 text-center">
+      {/* Contentkaart */}
+      <Card className="flex min-h-[200px] flex-col items-center justify-center gap-4 p-8 text-center">
         {current ? (
-          <p key={current.id} className="animate-pop text-2xl font-bold leading-snug text-ink">
-            {current.text}
-          </p>
+          <>
+            <p key={current.id} className="animate-pop text-2xl font-bold leading-snug text-ink">
+              {current.text}
+            </p>
+            <LevelBadge level={level} />
+          </>
         ) : (
           <p className="text-muted">Geen stellingen voor dit niveau.</p>
         )}
@@ -50,7 +76,14 @@ export default function StellingenGame() {
           Volgende stelling
         </Button>
         <span className="text-sm text-muted" aria-live="polite">
-          Nog {remaining} ongezien op niveau {level}.
+          Nog{' '}
+          <Chip>
+            <span className="material-symbols-rounded text-[12px]" aria-hidden="true">
+              visibility_off
+            </span>
+            {remaining} ongezien
+          </Chip>{' '}
+          op niveau {level}.
         </span>
       </div>
     </div>

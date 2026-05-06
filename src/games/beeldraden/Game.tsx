@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
+import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
+import { beeldradenGame } from './meta';
 import { IMAGE_PROMPTS } from './images';
 
 export default function BeeldradenGame() {
@@ -26,34 +28,71 @@ export default function BeeldradenGame() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-primary">
-          <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
-            image
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight">Beeldraden</h1>
+      {/* Header */}
+      <header className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-primary">
+            <span className="material-symbols-rounded text-[24px]" aria-hidden="true">
+              image
+            </span>
+            <h1 className="text-2xl font-bold tracking-tight">Beeldraden</h1>
+          </div>
+          <GameTagBadge tag={beeldradenGame.tag} />
         </div>
-        <p className="text-sm text-muted">
-          Beschrijf samen wat je op de foto ziet. Hulp nodig? Toon de hint.
-        </p>
+        <p className="text-sm text-muted">{beeldradenGame.description}</p>
       </header>
+
+      {/* Hoe werkt het */}
+      <Card className="p-4">
+        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
+          Hoe werkt het?
+        </p>
+        <ul className="flex flex-col gap-1.5">
+          {beeldradenGame.howToPlay.map((step, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-ink">
+              <span
+                aria-hidden="true"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              />
+              {step}
+            </li>
+          ))}
+        </ul>
+      </Card>
 
       <LevelPicker value={level} onChange={setLevel} />
 
+      {/* Fotokaart */}
       <Card className="overflow-hidden p-0">
         {current ? (
           <div key={current.id} className="animate-pop">
-            <img
-              src={current.src}
-              alt={current.alt}
-              className="aspect-[4/3] w-full object-cover"
-              loading="eager"
-            />
+            <div className="relative">
+              <img
+                src={current.src}
+                alt={current.alt}
+                className="aspect-[4/3] w-full object-cover"
+                loading="eager"
+              />
+              <div className="absolute left-3 top-3">
+                <LevelBadge level={level} />
+              </div>
+            </div>
             <div className="flex flex-col gap-3 p-5">
               {hintShown && current.hintCaption ? (
-                <p className="text-lg italic text-ink">Hint: {current.hintCaption}</p>
+                <div className="flex items-start gap-2 rounded-xl bg-accent/10 p-3">
+                  <span
+                    className="material-symbols-rounded shrink-0 text-[20px] text-accent"
+                    aria-hidden="true"
+                  >
+                    lightbulb
+                  </span>
+                  <p className="text-base italic text-ink">{current.hintCaption}</p>
+                </div>
               ) : (
                 <Button variant="secondary" onClick={() => setHintShown(true)}>
+                  <span className="material-symbols-rounded text-[18px]" aria-hidden="true">
+                    lightbulb
+                  </span>
                   Toon hint
                 </Button>
               )}
@@ -75,7 +114,14 @@ export default function BeeldradenGame() {
           Volgende foto
         </Button>
         <span className="text-sm text-muted" aria-live="polite">
-          Nog {remaining} ongezien op niveau {level}.
+          Nog{' '}
+          <Chip>
+            <span className="material-symbols-rounded text-[12px]" aria-hidden="true">
+              visibility_off
+            </span>
+            {remaining} ongezien
+          </Chip>{' '}
+          op niveau {level}.
         </span>
       </div>
     </div>
