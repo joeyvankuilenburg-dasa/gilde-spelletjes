@@ -35,3 +35,35 @@ export function DiceIcon({ className }: IconProps) {
     </span>
   );
 }
+
+export function TheaterIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      theater_comedy
+    </span>
+  );
+}
+
+export function HubIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      hub
+    </span>
+  );
+}
+
+export function PsychologyIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      psychology
+    </span>
+  );
+}
+
+export function QuoteIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      format_quote
+    </span>
+  );
+}
