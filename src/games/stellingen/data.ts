@@ -21,7 +21,6 @@ export const STATEMENTS: Statement[] = [
   { id: 's-a1-17', text: 'Liever appels of sinaasappels?', levels: ['A1'] },
   { id: 's-a1-18', text: 'Liever binnenshuis of buitenshuis sporten?', levels: ['A1'] },
   { id: 's-a1-19', text: 'Liever met de hand schrijven of typen?', levels: ['A1'] },
-  { id: 's-a1-20', text: 'Liever een bad nemen of douchen?', levels: ['A1'] },
 
   // ── A2 — iets meer uitleg nodig, dagelijkse keuzes ──────────────────────
   { id: 's-a2-01', text: 'Liever koken of uit eten?', levels: ['A2'] },
