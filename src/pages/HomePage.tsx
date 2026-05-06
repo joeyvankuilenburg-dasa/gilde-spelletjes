@@ -4,7 +4,14 @@ import { Chip } from '../components/ui/Badge';
 import { GAMES } from '../games';
 import type { GameTag } from '../games/types';
 
-const TAGS: GameTag[] = ['Spreken', 'Mening geven', 'Beschrijven', 'Raden'];
+const TAGS: GameTag[] = [
+  'Spreken',
+  'Mening geven',
+  'Beschrijven',
+  'Raden',
+  'Rollenspel',
+  'Woordenschat',
+];
 
 export default function HomePage() {
   const [activeTag, setActiveTag] = useState<GameTag | null>(null);

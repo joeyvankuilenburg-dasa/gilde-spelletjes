@@ -1,8 +1,20 @@
 import type { ComponentType, LazyExoticComponent } from 'react';
 
-export type GameId = 'onderwerpen' | 'stellingen' | 'beeldraden' | 'letterdobbelsteen';
+export type GameId =
+  | 'onderwerpen'
+  | 'stellingen'
+  | 'beeldraden'
+  | 'letterdobbelsteen'
+  | 'situaties'
+  | 'woordenweb';
 
-export type GameTag = 'Spreken' | 'Mening geven' | 'Beschrijven' | 'Raden';
+export type GameTag =
+  | 'Spreken'
+  | 'Mening geven'
+  | 'Beschrijven'
+  | 'Raden'
+  | 'Rollenspel'
+  | 'Woordenschat';
 
 export interface Game {
   id: GameId;

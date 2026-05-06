@@ -28,3 +28,19 @@ export interface DiceTheme {
   label: string;
   emoji?: string;
 }
+
+export interface Situation {
+  id: string;
+  scenario: string;
+  roleA: string;
+  roleB: string;
+  levels: Level[];
+  tips?: string[];
+}
+
+export interface WordPrompt {
+  id: string;
+  word: string;
+  emoji?: string;
+  levels: Level[];
+}
