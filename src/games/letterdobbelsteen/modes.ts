@@ -1,5 +1,5 @@
 export interface SubMode {
-  id: 'iksie' | 'beginklank' | 'eindklank' | 'thema';
+  id: 'beginklank' | 'eindklank' | 'thema';
   label: string;
   description: string;
   promptForLetter(letter: string, themeLabel?: string): string;
@@ -8,15 +8,6 @@ export interface SubMode {
 }
 
 export const SUB_MODES: SubMode[] = [
-  {
-    id: 'iksie',
-    label: 'Ik zie, ik zie…',
-    description:
-      'Eén speler ziet iets in de kamer dat met deze letter begint. De ander raadt wat het is.',
-    promptForLetter: (letter) =>
-      `Ik zie, ik zie wat jij niet ziet en het begint met de letter ${letter}.`,
-    wildPrompt: () => 'Wild! Kies zelf een letter en speel "Ik zie, ik zie…".',
-  },
   {
     id: 'beginklank',
     label: 'Beginklank',
