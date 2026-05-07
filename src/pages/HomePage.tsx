@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GameCard } from '../components/GameCard';
 import { Chip } from '../components/ui/Badge';
 import { GAMES } from '../games';
@@ -14,11 +15,29 @@ const TAGS: GameTag[] = [
 ];
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [activeTag, setActiveTag] = useState<GameTag | null>(null);
   const visibleGames = activeTag ? GAMES.filter((g) => g.tag === activeTag) : GAMES;
 
+  const goToRandomGame = () => {
+    const game = GAMES[Math.floor(Math.random() * GAMES.length)];
+    navigate(game.path);
+  };
+
   return (
     <div className="flex flex-col gap-6">
+      {/* Verras me */}
+      <button
+        type="button"
+        onClick={goToRandomGame}
+        className="flex w-full items-center justify-center gap-2 rounded-card bg-accent px-5 py-4 font-bold text-accent-fg shadow-sm transition-all hover:bg-accent/90 active:scale-[0.98]"
+      >
+        <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
+          casino
+        </span>
+        Verras me — kies een willekeurig spel
+      </button>
+
       {/* Filter */}
       <div className="flex flex-col gap-2">
         <p className="text-xs font-bold uppercase tracking-widest text-muted">Filter op type</p>
