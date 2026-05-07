@@ -16,6 +16,7 @@ export default function SituatiesGame() {
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
   const [tipsShown, setTipsShown] = useState(false);
+  const [pickedRole, setPickedRole] = useState<'A' | 'B' | null>(null);
 
   useEffect(() => {
     if (filtered.length > 0) pick();
@@ -24,6 +25,7 @@ export default function SituatiesGame() {
 
   useEffect(() => {
     setTipsShown(false);
+    setPickedRole(null);
   }, [current?.id]);
 
   return (
@@ -71,30 +73,89 @@ export default function SituatiesGame() {
             </div>
 
             {/* Rollen */}
-            <div className="flex gap-3">
-              <div className="bg-primary/8 flex flex-1 items-center gap-2 rounded-xl p-3">
-                <span
-                  className="material-symbols-rounded text-[20px] text-primary"
-                  aria-hidden="true"
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs font-bold uppercase tracking-widest text-muted">
+                Kies je rol
+              </p>
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => setPickedRole(pickedRole === 'A' ? null : 'A')}
+                  aria-pressed={pickedRole === 'A'}
+                  className={cn(
+                    'flex flex-1 items-center gap-2 rounded-xl p-3 text-left transition-all',
+                    pickedRole === 'A'
+                      ? 'bg-primary text-primary-fg shadow-sm'
+                      : 'bg-primary/8 hover:bg-primary/15',
+                  )}
                 >
-                  person
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wide text-muted">Rol A</p>
-                  <p className="font-bold text-ink">{current.roleA}</p>
-                </div>
-              </div>
-              <div className="flex flex-1 items-center gap-2 rounded-xl bg-accent/10 p-3">
-                <span
-                  className="material-symbols-rounded text-[20px] text-accent"
-                  aria-hidden="true"
+                  <span
+                    className={cn(
+                      'material-symbols-rounded text-[20px]',
+                      pickedRole === 'A' ? 'text-primary-fg' : 'text-primary',
+                    )}
+                    aria-hidden="true"
+                  >
+                    person
+                  </span>
+                  <div>
+                    <p
+                      className={cn(
+                        'text-xs font-bold uppercase tracking-wide',
+                        pickedRole === 'A' ? 'text-primary-fg/80' : 'text-muted',
+                      )}
+                    >
+                      Rol A
+                    </p>
+                    <p
+                      className={cn(
+                        'font-bold',
+                        pickedRole === 'A' ? 'text-primary-fg' : 'text-ink',
+                      )}
+                    >
+                      {current.roleA}
+                    </p>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPickedRole(pickedRole === 'B' ? null : 'B')}
+                  aria-pressed={pickedRole === 'B'}
+                  className={cn(
+                    'flex flex-1 items-center gap-2 rounded-xl p-3 text-left transition-all',
+                    pickedRole === 'B'
+                      ? 'bg-accent text-accent-fg shadow-sm'
+                      : 'bg-accent/10 hover:bg-accent/20',
+                  )}
                 >
-                  person
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wide text-muted">Rol B</p>
-                  <p className="font-bold text-ink">{current.roleB}</p>
-                </div>
+                  <span
+                    className={cn(
+                      'material-symbols-rounded text-[20px]',
+                      pickedRole === 'B' ? 'text-accent-fg' : 'text-accent',
+                    )}
+                    aria-hidden="true"
+                  >
+                    person
+                  </span>
+                  <div>
+                    <p
+                      className={cn(
+                        'text-xs font-bold uppercase tracking-wide',
+                        pickedRole === 'B' ? 'text-accent-fg/80' : 'text-muted',
+                      )}
+                    >
+                      Rol B
+                    </p>
+                    <p
+                      className={cn(
+                        'font-bold',
+                        pickedRole === 'B' ? 'text-accent-fg' : 'text-ink',
+                      )}
+                    >
+                      {current.roleB}
+                    </p>
+                  </div>
+                </button>
               </div>
             </div>
 
