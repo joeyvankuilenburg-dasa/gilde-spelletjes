@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
@@ -7,18 +7,37 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
+import { TOPIC_CATEGORIES, type TopicCategory } from '../../types/content';
 import { onderwerpenGame } from './meta';
 import { TOPICS } from './data';
 
+const CATEGORY_EMOJI: Record<TopicCategory, string> = {
+  Buurt: '🏘️',
+  Familie: '👨‍👩‍👧',
+  Werk: '💼',
+  Eten: '🍽️',
+  Reizen: '✈️',
+  'Vrije tijd': '🎉',
+  Wonen: '🏠',
+  Gezondheid: '💚',
+};
+
 export default function OnderwerpenGame() {
   const [level, setLevel] = useLevelFilter();
-  const filtered = useMemo(() => TOPICS.filter((t) => t.levels.includes(level)), [level]);
+  const [activeCategory, setActiveCategory] = useState<TopicCategory | null>(null);
+  const filtered = useMemo(
+    () =>
+      TOPICS.filter(
+        (t) =>
+          t.levels.includes(level) && (activeCategory === null || t.category === activeCategory),
+      ),
+    [level, activeCategory],
+  );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
 
   useEffect(() => {
     if (filtered.length > 0) pick();
-    // pick once when level changes; intentionally omitted from deps to avoid re-pick loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered]);
 
@@ -40,6 +59,40 @@ export default function OnderwerpenGame() {
 
       <LevelPicker value={level} onChange={setLevel} />
 
+      {/* Categorie filter */}
+      <div className="flex flex-col gap-2">
+        <p className="text-xs font-bold uppercase tracking-widest text-muted">Onderwerp</p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setActiveCategory(null)}
+            className={cn(
+              'rounded-full px-3 py-1.5 text-xs font-bold transition-colors',
+              activeCategory === null
+                ? 'bg-primary text-primary-fg'
+                : 'bg-surface text-muted shadow-card hover:text-ink',
+            )}
+          >
+            Alles
+          </button>
+          {TOPIC_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
+              className={cn(
+                'rounded-full px-3 py-1.5 text-xs font-bold transition-colors',
+                activeCategory === cat
+                  ? 'bg-primary text-primary-fg'
+                  : 'bg-surface text-muted shadow-card hover:text-ink',
+              )}
+            >
+              {CATEGORY_EMOJI[cat]} {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Contentkaart */}
       <Card
         className={cn(
@@ -55,13 +108,13 @@ export default function OnderwerpenGame() {
             </p>
             <div className="flex items-center gap-2">
               <LevelBadge level={level} />
-              {current.tags?.map((tag) => (
-                <Chip key={tag}>{tag}</Chip>
-              ))}
+              <Chip>
+                {CATEGORY_EMOJI[current.category]} {current.category}
+              </Chip>
             </div>
           </>
         ) : (
-          <p className="text-muted">Geen onderwerpen voor dit niveau.</p>
+          <p className="text-muted">Geen onderwerpen met deze filters.</p>
         )}
       </Card>
 
@@ -84,8 +137,7 @@ export default function OnderwerpenGame() {
               visibility_off
             </span>
             {remaining} ongezien
-          </Chip>{' '}
-          op niveau {level}.
+          </Chip>
         </span>
       </div>
 

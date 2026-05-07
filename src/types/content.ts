@@ -1,10 +1,23 @@
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
 export type Level = (typeof LEVELS)[number];
 
+export const TOPIC_CATEGORIES = [
+  'Buurt',
+  'Familie',
+  'Werk',
+  'Eten',
+  'Reizen',
+  'Vrije tijd',
+  'Wonen',
+  'Gezondheid',
+] as const;
+export type TopicCategory = (typeof TOPIC_CATEGORIES)[number];
+
 export interface Topic {
   id: string;
   text: string;
   levels: Level[];
+  category: TopicCategory;
   tags?: string[];
 }
 
