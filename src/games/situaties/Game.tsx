@@ -15,7 +15,8 @@ export default function SituatiesGame() {
   const filtered = useMemo(() => SITUATIONS.filter((s) => s.levels.includes(level)), [level]);
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
-  const [tipsShown, setTipsShown] = useState(false);
+  const [tipsShownA, setTipsShownA] = useState(false);
+  const [tipsShownB, setTipsShownB] = useState(false);
   const [pickedRole, setPickedRole] = useState<'A' | 'B' | null>(null);
 
   useEffect(() => {
@@ -24,7 +25,8 @@ export default function SituatiesGame() {
   }, [filtered]);
 
   useEffect(() => {
-    setTipsShown(false);
+    setTipsShownA(false);
+    setTipsShownB(false);
     setPickedRole(null);
   }, [current?.id]);
 
@@ -77,121 +79,161 @@ export default function SituatiesGame() {
               <p className="text-xs font-bold uppercase tracking-widest text-muted">
                 Kies je rol
               </p>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => setPickedRole(pickedRole === 'A' ? null : 'A')}
-                  aria-pressed={pickedRole === 'A'}
-                  className={cn(
-                    'flex flex-1 items-center gap-2 rounded-xl p-3 text-left transition-all',
-                    pickedRole === 'A'
-                      ? 'bg-primary text-primary-fg shadow-sm'
-                      : 'bg-primary/8 hover:bg-primary/15',
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'material-symbols-rounded text-[20px]',
-                      pickedRole === 'A' ? 'text-primary-fg' : 'text-primary',
-                    )}
-                    aria-hidden="true"
-                  >
-                    person
-                  </span>
-                  <div>
-                    <p
+              <div className="flex flex-col gap-2">
+                {/* Rol A */}
+                {(['A', 'B'] as const).map((rol) => {
+                  const isA = rol === 'A';
+                  const picked = pickedRole === rol;
+                  const tipsShown = isA ? tipsShownA : tipsShownB;
+                  const setTipsShown = isA ? setTipsShownA : setTipsShownB;
+                  const roleLabel = isA ? current.roleA : current.roleB;
+                  return (
+                    <div
+                      key={rol}
                       className={cn(
-                        'text-xs font-bold uppercase tracking-wide',
-                        pickedRole === 'A' ? 'text-primary-fg/80' : 'text-muted',
+                        'flex flex-col rounded-xl transition-all',
+                        picked
+                          ? isA
+                            ? 'bg-primary shadow-sm'
+                            : 'bg-accent shadow-sm'
+                          : isA
+                            ? 'bg-primary/8'
+                            : 'bg-accent/10',
                       )}
                     >
-                      Rol A
-                    </p>
-                    <p
-                      className={cn(
-                        'font-bold',
-                        pickedRole === 'A' ? 'text-primary-fg' : 'text-ink',
+                      <button
+                        type="button"
+                        onClick={() => setPickedRole(pickedRole === rol ? null : rol)}
+                        aria-pressed={picked}
+                        className="flex items-center gap-2 p-3 text-left"
+                      >
+                        <span
+                          className={cn(
+                            'material-symbols-rounded text-[20px]',
+                            picked
+                              ? isA
+                                ? 'text-primary-fg'
+                                : 'text-accent-fg'
+                              : isA
+                                ? 'text-primary'
+                                : 'text-accent',
+                          )}
+                          aria-hidden="true"
+                        >
+                          {picked ? 'person_check' : 'person'}
+                        </span>
+                        <div className="flex-1">
+                          <p
+                            className={cn(
+                              'text-xs font-bold uppercase tracking-wide',
+                              picked
+                                ? isA
+                                  ? 'text-primary-fg/70'
+                                  : 'text-accent-fg/70'
+                                : 'text-muted',
+                            )}
+                          >
+                            Rol {rol}
+                          </p>
+                          <p
+                            className={cn(
+                              'font-bold',
+                              picked
+                                ? isA
+                                  ? 'text-primary-fg'
+                                  : 'text-accent-fg'
+                                : 'text-ink',
+                            )}
+                          >
+                            {roleLabel}
+                          </p>
+                        </div>
+                        {!picked && (
+                          <span className="text-xs font-bold text-muted">Kies</span>
+                        )}
+                      </button>
+                      {current.tips && current.tips.length > 0 && (
+                        <div className="px-3 pb-3">
+                          {tipsShown ? (
+                            <div
+                              className={cn(
+                                'flex flex-col gap-1.5 rounded-lg p-3',
+                                picked
+                                  ? isA
+                                    ? 'bg-primary-fg/10'
+                                    : 'bg-accent-fg/10'
+                                  : 'bg-black/5',
+                              )}
+                            >
+                              <p
+                                className={cn(
+                                  'text-xs font-bold uppercase tracking-wide',
+                                  picked
+                                    ? isA
+                                      ? 'text-primary-fg/70'
+                                      : 'text-accent-fg/70'
+                                    : 'text-muted',
+                                )}
+                              >
+                                Tips
+                              </p>
+                              <ul className="flex flex-col gap-1">
+                                {current.tips.map((tip, i) => (
+                                  <li
+                                    key={i}
+                                    className={cn(
+                                      'flex items-start gap-2 text-sm',
+                                      picked
+                                        ? isA
+                                          ? 'text-primary-fg'
+                                          : 'text-accent-fg'
+                                        : 'text-ink',
+                                    )}
+                                  >
+                                    <span
+                                      className={cn(
+                                        'mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full',
+                                        picked
+                                          ? isA
+                                            ? 'bg-primary-fg/60'
+                                            : 'bg-accent-fg/60'
+                                          : 'bg-accent',
+                                      )}
+                                    />
+                                    {tip}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => setTipsShown(true)}
+                              className={cn(
+                                'flex items-center gap-1.5 text-xs font-bold',
+                                picked
+                                  ? isA
+                                    ? 'text-primary-fg/70 hover:text-primary-fg'
+                                    : 'text-accent-fg/70 hover:text-accent-fg'
+                                  : 'text-muted hover:text-ink',
+                              )}
+                            >
+                              <span
+                                className="material-symbols-rounded text-[16px]"
+                                aria-hidden="true"
+                              >
+                                lightbulb
+                              </span>
+                              Toon tips
+                            </button>
+                          )}
+                        </div>
                       )}
-                    >
-                      {current.roleA}
-                    </p>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPickedRole(pickedRole === 'B' ? null : 'B')}
-                  aria-pressed={pickedRole === 'B'}
-                  className={cn(
-                    'flex flex-1 items-center gap-2 rounded-xl p-3 text-left transition-all',
-                    pickedRole === 'B'
-                      ? 'bg-accent text-accent-fg shadow-sm'
-                      : 'bg-accent/10 hover:bg-accent/20',
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'material-symbols-rounded text-[20px]',
-                      pickedRole === 'B' ? 'text-accent-fg' : 'text-accent',
-                    )}
-                    aria-hidden="true"
-                  >
-                    person
-                  </span>
-                  <div>
-                    <p
-                      className={cn(
-                        'text-xs font-bold uppercase tracking-wide',
-                        pickedRole === 'B' ? 'text-accent-fg/80' : 'text-muted',
-                      )}
-                    >
-                      Rol B
-                    </p>
-                    <p
-                      className={cn(
-                        'font-bold',
-                        pickedRole === 'B' ? 'text-accent-fg' : 'text-ink',
-                      )}
-                    >
-                      {current.roleB}
-                    </p>
-                  </div>
-                </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-
-            {/* Tips */}
-            {current.tips && current.tips.length > 0 && (
-              <div>
-                {tipsShown ? (
-                  <div className="flex flex-col gap-2 rounded-xl bg-accent/10 p-3">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="material-symbols-rounded text-[18px] text-accent"
-                        aria-hidden="true"
-                      >
-                        lightbulb
-                      </span>
-                      <p className="text-xs font-bold uppercase tracking-wide text-muted">Tips</p>
-                    </div>
-                    <ul className="flex flex-col gap-1">
-                      {current.tips.map((tip, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-ink">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                          {tip}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <Button variant="secondary" onClick={() => setTipsShown(true)}>
-                    <span className="material-symbols-rounded text-[18px]" aria-hidden="true">
-                      lightbulb
-                    </span>
-                    Toon tips
-                  </Button>
-                )}
-              </div>
-            )}
           </>
         ) : (
           <p className="py-8 text-center text-muted">Geen situaties voor dit niveau.</p>
