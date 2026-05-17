@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
+import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -7,20 +8,9 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
-import { TOPIC_CATEGORIES, type TopicCategory } from '../../types/content';
+import { type TopicCategory } from '../../types/content';
 import { onderwerpenGame } from './meta';
 import { TOPICS } from './data';
-
-const CATEGORY_EMOJI: Record<TopicCategory, string> = {
-  Buurt: '🏘️',
-  Familie: '👨‍👩‍👧',
-  Werk: '💼',
-  Eten: '🍽️',
-  Reizen: '✈️',
-  'Vrije tijd': '🎉',
-  Wonen: '🏠',
-  Gezondheid: '💚',
-};
 
 export default function OnderwerpenGame() {
   const [level, setLevel] = useLevelFilter();
@@ -58,40 +48,7 @@ export default function OnderwerpenGame() {
       </header>
 
       <LevelPicker value={level} onChange={setLevel} />
-
-      {/* Categorie filter */}
-      <div className="flex flex-col gap-2">
-        <p className="text-xs font-bold uppercase tracking-widest text-muted">Onderwerp</p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setActiveCategory(null)}
-            className={cn(
-              'rounded-full px-3 py-1.5 text-xs font-bold transition-colors',
-              activeCategory === null
-                ? 'bg-primary text-primary-fg'
-                : 'bg-surface text-muted shadow-card hover:text-ink',
-            )}
-          >
-            Alles
-          </button>
-          {TOPIC_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
-              className={cn(
-                'rounded-full px-3 py-1.5 text-xs font-bold transition-colors',
-                activeCategory === cat
-                  ? 'bg-primary text-primary-fg'
-                  : 'bg-surface text-muted shadow-card hover:text-ink',
-              )}
-            >
-              {CATEGORY_EMOJI[cat]} {cat}
-            </button>
-          ))}
-        </div>
-      </div>
+      <CategoryFilter value={activeCategory} onChange={setActiveCategory} />
 
       {/* Contentkaart */}
       <Card

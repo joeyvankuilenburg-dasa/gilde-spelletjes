@@ -8,6 +8,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Door veel te oefenen word je beter in iets.',
     example: 'Je Nederlands wordt steeds beter — oefening baart kunst!',
     levels: ['A2'],
+    category: 'Werk',
   },
   {
     id: 'sp-a2-laat',
@@ -15,6 +16,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Het is beter om iets te laat te doen dan helemaal niet.',
     example: 'Hij stuurde de brief een week te laat, maar beter laat dan nooit.',
     levels: ['A2'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-a2-waagt',
@@ -22,6 +24,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Als je niets probeert, kun je ook niets bereiken.',
     example: 'Ze was bang om te solliciteren, maar wie niet waagt, wie niet wint.',
     levels: ['A2'],
+    category: 'Werk',
   },
   {
     id: 'sp-a2-thuis',
@@ -29,6 +32,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Je voelt je nergens zo goed als thuis.',
     example: 'Na drie weken vakantie was ze blij terug te zijn — zoals het klokje thuis tikt.',
     levels: ['A2'],
+    category: 'Wonen',
   },
   {
     id: 'sp-a2-leugen',
@@ -37,6 +41,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     example:
       'Hij zei dat hij ziek was, maar zijn collega zag hem in de stad — leugens hebben korte benen.',
     levels: ['A2'],
+    category: 'Familie',
   },
   {
     id: 'sp-a2-geld',
@@ -44,6 +49,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Rijk zijn maakt je niet automatisch gelukkig.',
     example: 'Hij had alles, maar voelde zich leeg — geld maakt niet gelukkig.',
     levels: ['A2'],
+    category: 'Werk',
   },
   {
     id: 'sp-a2-morgen',
@@ -51,6 +57,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Doe dingen meteen en wacht niet te lang.',
     example: 'Begin nu met leren — stel niet uit tot morgen wat je vandaag kunt doen.',
     levels: ['A2', 'B1'],
+    category: 'Werk',
   },
 
   // ── B1 ──────────────────────────────────────────────────────────────────
@@ -60,6 +67,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Een kind lijkt veel op zijn ouders in gedrag of karakter.',
     example: 'Zijn dochter is ook musicus geworden — de appel valt niet ver van de boom.',
     levels: ['B1'],
+    category: 'Familie',
   },
   {
     id: 'sp-b1-handen',
@@ -67,6 +75,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Als je iets samen doet met meerdere mensen, is het minder zwaar.',
     example: 'Met het hele team was de verhuizing snel klaar — vele handen maken licht werk.',
     levels: ['B1'],
+    category: 'Werk',
   },
   {
     id: 'sp-b1-deur',
@@ -74,6 +83,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Direct over het onderwerp beginnen zonder er omheen te draaien.',
     example: 'Ik val maar meteen met de deur in huis: ik wil je om een gunst vragen.',
     levels: ['B1'],
+    category: 'Familie',
   },
   {
     id: 'sp-b1-storm',
@@ -81,6 +91,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Veel ophef maken over iets wat eigenlijk niet zo belangrijk is.',
     example: 'Ze maakten ruzie over de kleur van de muren — een echte storm in een glas water.',
     levels: ['B1'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b1-kat',
@@ -89,6 +100,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     example:
       'De snoepjes voor de kinderen bewaken en ze daarna alleen laten is de kat op het spek binden.',
     levels: ['B1'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b1-schaap',
@@ -97,6 +109,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     example:
       'Ze willen een medewerker die alles kan — ze zijn het schaap met de vijf poten aan het zoeken.',
     levels: ['B1'],
+    category: 'Werk',
   },
   {
     id: 'sp-b1-maan',
@@ -104,6 +117,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Verloren, kapot, of compleet mislukt zijn.',
     example: 'Mijn telefoon is gevallen en het scherm is naar de maan.',
     levels: ['B1'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b1-worst',
@@ -111,6 +125,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Iemand iets afpakken of afhouden waar hij recht op had.',
     example: 'Zij had de baan bijna, maar een ander boorde het haar door de neus.',
     levels: ['B1'],
+    category: 'Werk',
   },
   {
     id: 'sp-b1-paard',
@@ -118,6 +133,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Je kansen niet alleen op één mogelijkheid zetten.',
     example: 'Solliciteer bij meerdere bedrijven — wed niet op één paard.',
     levels: ['B1', 'B2'],
+    category: 'Werk',
   },
   {
     id: 'sp-b1-lachen',
@@ -125,6 +141,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Humor en vrolijkheid helpen je om je beter te voelen.',
     example: 'Na een zware dag deed een grappige film wonderen — lachen is de beste medicijn.',
     levels: ['B1'],
+    category: 'Gezondheid',
   },
 
   // ── B2 ──────────────────────────────────────────────────────────────────
@@ -134,6 +151,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Iets wat echt goed is, heeft geen reclame of aanbeveling nodig.',
     example: 'Dat restaurant zit altijd vol zonder advertenties — goede wijn behoeft geen krans.',
     levels: ['B2'],
+    category: 'Werk',
   },
   {
     id: 'sp-b2-ezel',
@@ -141,6 +159,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Een verstandig persoon maakt dezelfde fout niet twee keer.',
     example: 'Na die mislukking pas ik mijn aanpak aan — een ezel stoot zich niet twee keer.',
     levels: ['B2'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b2-voordeel',
@@ -148,6 +167,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Aan elk voordeel zit ook een keerzijde.',
     example: "Thuiswerken is fijn, maar je mist het sociale contact — elk voordeel heb z'n nadeel.",
     levels: ['B2'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b2-kleine',
@@ -156,6 +176,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     example:
       'Bedank ook voor kleine attenties — wie het kleine niet eert, is het grote niet weerd.',
     levels: ['B2'],
+    category: 'Familie',
   },
   {
     id: 'sp-b2-vis',
@@ -163,6 +184,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'De machtigen profiteren ten koste van de zwakkeren.',
     example: 'Het kleine bedrijf werd opgekocht — grote vissen eten kleine vissen.',
     levels: ['B2'],
+    category: 'Werk',
   },
   {
     id: 'sp-b2-vlieg',
@@ -170,6 +192,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Met één actie twee dingen tegelijk bereiken.',
     example: 'Door de fiets te nemen sport ik én spaar ik benzine — twee vliegen in één klap.',
     levels: ['B1', 'B2'],
+    category: 'Werk',
   },
   {
     id: 'sp-b2-regen',
@@ -177,6 +200,7 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Van een slechte situatie in een nog slechtere situatie belanden.',
     example: 'Hij stopte met die baan, maar de nieuwe was nog erger — van de regen in de drup.',
     levels: ['B2'],
+    category: 'Vrije tijd',
   },
   {
     id: 'sp-b2-steen',
@@ -184,5 +208,6 @@ export const SPREEKWOORDEN: Spreekwoord[] = [
     meaning: 'Als eerste iemand bekritiseren of aanvallen.',
     example: 'Niemand durft de eerste steen te werpen want ze hebben allemaal fouten gemaakt.',
     levels: ['B2'],
+    category: 'Familie',
   },
 ];

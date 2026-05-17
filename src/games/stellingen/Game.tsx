@@ -1,5 +1,6 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
+import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -7,12 +8,21 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
+import { type TopicCategory } from '../../types/content';
 import { stellingenGame } from './meta';
 import { STATEMENTS } from './data';
 
 export default function StellingenGame() {
   const [level, setLevel] = useLevelFilter();
-  const filtered = useMemo(() => STATEMENTS.filter((s) => s.levels.includes(level)), [level]);
+  const [activeCategory, setActiveCategory] = useState<TopicCategory | null>(null);
+  const filtered = useMemo(
+    () =>
+      STATEMENTS.filter(
+        (s) =>
+          s.levels.includes(level) && (activeCategory === null || s.category === activeCategory),
+      ),
+    [level, activeCategory],
+  );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
 
@@ -38,6 +48,7 @@ export default function StellingenGame() {
       </header>
 
       <LevelPicker value={level} onChange={setLevel} />
+      <CategoryFilter value={activeCategory} onChange={setActiveCategory} />
 
       {/* Contentkaart */}
       <Card
@@ -52,10 +63,15 @@ export default function StellingenGame() {
             <p key={current.id} className="animate-pop text-2xl font-bold leading-snug text-ink">
               {current.text}
             </p>
-            <LevelBadge level={level} />
+            <div className="flex items-center gap-2">
+              <LevelBadge level={level} />
+              <Chip>
+                {CATEGORY_EMOJI[current.category]} {current.category}
+              </Chip>
+            </div>
           </>
         ) : (
-          <p className="text-muted">Geen stellingen voor dit niveau.</p>
+          <p className="text-muted">Geen stellingen met deze filters.</p>
         )}
       </Card>
 
@@ -78,8 +94,7 @@ export default function StellingenGame() {
               visibility_off
             </span>
             {remaining} ongezien
-          </Chip>{' '}
-          op niveau {level}.
+          </Chip>
         </span>
       </div>
 

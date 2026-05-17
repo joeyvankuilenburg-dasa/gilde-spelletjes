@@ -8,6 +8,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Klant',
     roleB: 'Bakker',
     levels: ['A1'],
+    category: 'Eten',
     tips: ['Vraag welke broden er zijn.', 'Zeg hoeveel je wilt.', 'Vraag wat het kost.'],
   },
   {
@@ -16,6 +17,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Nieuwe buur',
     roleB: 'Buur',
     levels: ['A1'],
+    category: 'Buurt',
     tips: [
       'Zeg je naam.',
       'Vertel waar je vandaan komt.',
@@ -28,6 +30,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Klant',
     roleB: 'Medewerker',
     levels: ['A1'],
+    category: 'Eten',
     tips: ['Zeg wat je zoekt.', 'Bedank de medewerker.'],
   },
   {
@@ -36,6 +39,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Reiziger',
     roleB: 'Medepassagier',
     levels: ['A1'],
+    category: 'Buurt',
     tips: ['Vraag of de plek vrij is.', 'Bedank de persoon.'],
   },
   {
@@ -44,6 +48,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Student',
     roleB: 'Leraar',
     levels: ['A1'],
+    category: 'Werk',
     tips: ['Zeg welk woord of welke zin je niet begrijpt.', 'Vraag of de leraar het wil herhalen.'],
   },
   {
@@ -52,6 +57,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Klant',
     roleB: 'Barista',
     levels: ['A1', 'A2'],
+    category: 'Eten',
     tips: ['Vraag wat er is.', 'Bestel iets.', 'Vraag de prijs.'],
   },
   {
@@ -60,6 +66,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Voorbijganger',
     roleB: 'Buurtbewoner',
     levels: ['A1', 'A2'],
+    category: 'Buurt',
     tips: ['Zeg dat je verdwaald bent.', 'Vraag de weg naar het station.', 'Bedank de persoon.'],
   },
   {
@@ -68,6 +75,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Bezoeker',
     roleB: 'Bibliotheekmedewerker',
     levels: ['A1', 'A2'],
+    category: 'Buurt',
     tips: ['Vraag hoe je een pas kunt aanvragen.', 'Geef je naam en adres op.'],
   },
 
@@ -78,6 +86,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Patiënt',
     roleB: 'Dokter',
     levels: ['A2'],
+    category: 'Gezondheid',
     tips: ['Beschrijf je klachten.', 'Zeg hoe lang je al ziek bent.', 'Vraag wat je moet doen.'],
   },
   {
@@ -86,6 +95,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Patiënt',
     roleB: 'Receptionist',
     levels: ['A2'],
+    category: 'Gezondheid',
     tips: ['Zeg waarom je belt.', 'Geef aan wanneer je kunt.', 'Bevestig datum en tijd.'],
   },
   {
@@ -94,6 +104,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Werknemer',
     roleB: 'Collega',
     levels: ['A2', 'B1'],
+    category: 'Werk',
     tips: ['Leg uit wat het probleem is.', 'Vraag of de collega tijd heeft.', 'Bedank je collega.'],
   },
   {
@@ -103,6 +114,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Gast',
     roleB: 'Ober',
     levels: ['A2', 'B1'],
+    category: 'Eten',
     tips: [
       'Wees vriendelijk maar duidelijk.',
       'Beschrijf het probleem.',
@@ -115,6 +127,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Huurder',
     roleB: 'Verhuurder',
     levels: ['A2', 'B1'],
+    category: 'Wonen',
     tips: [
       'Vraag naar de huurprijs.',
       'Vraag wat er inbegrepen is.',
@@ -127,6 +140,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Ouder',
     roleB: 'Medewerker kinderopvang',
     levels: ['A2'],
+    category: 'Familie',
     tips: [
       'Vraag naar openingstijden.',
       'Vraag wat het kost.',
@@ -140,6 +154,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Deelnemer',
     roleB: 'Taalmaatje',
     levels: ['A2'],
+    category: 'Eten',
     tips: ['Noem de producten die je nodig hebt.', 'Vraag hoe je ze schrijft.'],
   },
 
@@ -150,6 +165,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Klant',
     roleB: 'Winkelmedewerker',
     levels: ['B1'],
+    category: 'Buurt',
     tips: [
       'Leg uit wat er kapot is.',
       'Vraag om je geld terug of een nieuw product.',
@@ -162,6 +178,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Sollicitant',
     roleB: 'Manager',
     levels: ['B1', 'B2'],
+    category: 'Werk',
     tips: [
       'Vertel iets over jezelf.',
       'Leg uit waarom je deze baan wil.',
@@ -174,6 +191,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Jij',
     roleB: 'Vriend',
     levels: ['B1'],
+    category: 'Gezondheid',
     tips: ['Beschrijf hoe je je voelt.', 'Vertel wat je mist.', 'Vraag om advies of begrip.'],
   },
   {
@@ -182,6 +200,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Bewoner A',
     roleB: 'Bewoner B',
     levels: ['B1'],
+    category: 'Buurt',
     tips: ['Leg kalm je situatie uit.', 'Luister naar de ander.', 'Zoek samen een oplossing.'],
   },
   {
@@ -190,6 +209,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Deelnemer',
     roleB: 'Vrijwilliger',
     levels: ['B1'],
+    category: 'Werk',
     tips: ['Wijs aan wat je niet begrijpt.', 'Vraag om een uitleg in gewone taal.'],
   },
   {
@@ -198,6 +218,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Medewerker',
     roleB: 'Teamlid',
     levels: ['B1', 'B2'],
+    category: 'Werk',
     tips: ['Zeg dat je iets wil zeggen.', 'Geef je mening duidelijk.', 'Vraag wat de ander denkt.'],
   },
 
@@ -208,6 +229,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Werknemer',
     roleB: 'Werkgever',
     levels: ['B2'],
+    category: 'Werk',
     tips: [
       'Noem je huidige situatie.',
       'Vraag om een verhoging met een reden.',
@@ -220,6 +242,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Collega A',
     roleB: 'Collega B',
     levels: ['B2'],
+    category: 'Werk',
     tips: [
       'Vertel jouw standpunt en geef redenen.',
       'Reageer respectvol op de mening van de ander.',
@@ -232,6 +255,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Jij',
     roleB: 'Vriend',
     levels: ['B2'],
+    category: 'Familie',
     tips: ['Bied je excuses aan.', 'Leg uit wat er is gebeurd.', 'Maak het goed.'],
   },
   {
@@ -240,6 +264,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Student',
     roleB: 'Docent',
     levels: ['B1', 'B2'],
+    category: 'Werk',
     tips: [
       'Leg de situatie uit.',
       'Vraag vriendelijk om meer tijd.',
@@ -252,6 +277,7 @@ export const SITUATIONS: Situation[] = [
     roleA: 'Bewoner',
     roleB: 'Buurtbewoner',
     levels: ['B2'],
+    category: 'Buurt',
     tips: [
       'Beschrijf het probleem concreet.',
       'Vraag anderen om steun.',

@@ -1,22 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
+import { type TopicCategory } from '../../types/content';
 import { beeldradenGame } from './meta';
 import { IMAGE_PROMPTS } from './images';
 
 export default function BeeldradenGame() {
-  const { current, pick, remaining } = useNoRepeatPicker(IMAGE_PROMPTS);
+  const [activeCategory, setActiveCategory] = useState<TopicCategory | null>(null);
+  const filtered = useMemo(
+    () =>
+      activeCategory === null
+        ? IMAGE_PROMPTS
+        : IMAGE_PROMPTS.filter((img) => img.category === activeCategory),
+    [activeCategory],
+  );
+  const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
   const [hintShown, setHintShown] = useState(false);
 
   useEffect(() => {
-    pick();
+    if (filtered.length > 0) pick();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filtered]);
 
   useEffect(() => {
     setHintShown(false);
@@ -38,6 +48,8 @@ export default function BeeldradenGame() {
         <p className="text-sm text-muted">{beeldradenGame.description}</p>
       </header>
 
+      <CategoryFilter value={activeCategory} onChange={setActiveCategory} />
+
       {/* Fotokaart */}
       <Card
         className={cn(
@@ -55,6 +67,9 @@ export default function BeeldradenGame() {
               loading="eager"
             />
             <div className="flex flex-col gap-3 p-5">
+              <Chip>
+                {CATEGORY_EMOJI[current.category]} {current.category}
+              </Chip>
               {hintShown && current.hintCaption ? (
                 <div className="flex items-start gap-2 rounded-xl bg-accent/10 p-3">
                   <span
@@ -84,7 +99,12 @@ export default function BeeldradenGame() {
       </Card>
 
       <div className="flex flex-col items-center gap-2">
-        <Button variant="accent" size="lg" onClick={() => flip(pick)}>
+        <Button
+          variant="accent"
+          size="lg"
+          onClick={() => flip(pick)}
+          disabled={filtered.length === 0}
+        >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
             shuffle
           </span>

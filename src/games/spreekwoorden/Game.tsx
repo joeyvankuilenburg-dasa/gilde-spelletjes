@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
+import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -7,12 +8,21 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { cn } from '../../lib/cn';
+import { type TopicCategory } from '../../types/content';
 import { spreekwoordenGame } from './meta';
 import { SPREEKWOORDEN } from './data';
 
 export default function SpreekwoordenGame() {
   const [level, setLevel] = useLevelFilter();
-  const filtered = useMemo(() => SPREEKWOORDEN.filter((s) => s.levels.includes(level)), [level]);
+  const [activeCategory, setActiveCategory] = useState<TopicCategory | null>(null);
+  const filtered = useMemo(
+    () =>
+      SPREEKWOORDEN.filter(
+        (s) =>
+          s.levels.includes(level) && (activeCategory === null || s.category === activeCategory),
+      ),
+    [level, activeCategory],
+  );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
   const [meaningShown, setMeaningShown] = useState(false);
@@ -43,6 +53,7 @@ export default function SpreekwoordenGame() {
       </header>
 
       <LevelPicker value={level} onChange={setLevel} />
+      <CategoryFilter value={activeCategory} onChange={setActiveCategory} />
 
       {/* Spreekwoord-kaart */}
       <Card
@@ -65,7 +76,12 @@ export default function SpreekwoordenGame() {
                 </span>
                 <p className="text-xl font-bold italic leading-snug text-ink">{current.text}</p>
               </div>
-              <LevelBadge level={level} />
+              <div className="flex items-center gap-2">
+                <LevelBadge level={level} />
+                <Chip>
+                  {CATEGORY_EMOJI[current.category]} {current.category}
+                </Chip>
+              </div>
             </div>
 
             {/* Betekenis */}
@@ -104,7 +120,7 @@ export default function SpreekwoordenGame() {
             )}
           </>
         ) : (
-          <p className="py-8 text-center text-muted">Geen spreekwoorden voor dit niveau.</p>
+          <p className="py-8 text-center text-muted">Geen spreekwoorden met deze filters.</p>
         )}
       </Card>
 
@@ -127,8 +143,7 @@ export default function SpreekwoordenGame() {
               visibility_off
             </span>
             {remaining} ongezien
-          </Chip>{' '}
-          op niveau {level}.
+          </Chip>
         </span>
       </div>
 

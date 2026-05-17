@@ -25,6 +25,7 @@ export interface Statement {
   id: string;
   text: string;
   levels: Level[];
+  category: TopicCategory;
 }
 
 export interface ImagePrompt {
@@ -32,6 +33,7 @@ export interface ImagePrompt {
   src: string;
   alt: string;
   levels: Level[];
+  category: TopicCategory;
   hintCaption?: string;
   credit?: string;
 }
@@ -48,6 +50,7 @@ export interface Situation {
   roleA: string;
   roleB: string;
   levels: Level[];
+  category: TopicCategory;
   tips?: string[];
 }
 
@@ -56,6 +59,7 @@ export interface WordPrompt {
   word: string;
   emoji?: string;
   levels: Level[];
+  category: TopicCategory;
 }
 
 export type WieWatCategory = 'Beroep' | 'Dier' | 'Voorwerp' | 'Persoon' | 'Eten' | 'Plek';
@@ -73,4 +77,5 @@ export interface Spreekwoord {
   meaning: string;
   example?: string;
   levels: Level[];
+  category: TopicCategory;
 }

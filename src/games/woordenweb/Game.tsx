@@ -1,5 +1,6 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
+import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -8,6 +9,7 @@ import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { useCountdown } from '../../hooks/useCountdown';
 import { cn } from '../../lib/cn';
+import { type TopicCategory } from '../../types/content';
 import { woordenwebGame } from './meta';
 import { WORD_PROMPTS } from './data';
 import { Timer } from './Timer';
@@ -16,7 +18,15 @@ const TIMER_SECONDS = 60;
 
 export default function WoordenwebGame() {
   const [level, setLevel] = useLevelFilter();
-  const filtered = useMemo(() => WORD_PROMPTS.filter((w) => w.levels.includes(level)), [level]);
+  const [activeCategory, setActiveCategory] = useState<TopicCategory | null>(null);
+  const filtered = useMemo(
+    () =>
+      WORD_PROMPTS.filter(
+        (w) =>
+          w.levels.includes(level) && (activeCategory === null || w.category === activeCategory),
+      ),
+    [level, activeCategory],
+  );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
   const countdown = useCountdown(TIMER_SECONDS);
@@ -53,6 +63,7 @@ export default function WoordenwebGame() {
       </header>
 
       <LevelPicker value={level} onChange={setLevel} />
+      <CategoryFilter value={activeCategory} onChange={setActiveCategory} />
 
       {/* Woordkaart */}
       <Card
@@ -71,7 +82,12 @@ export default function WoordenwebGame() {
             )}
             <div className="flex flex-col items-center gap-2">
               <p className="text-4xl font-bold leading-tight text-ink">{current.word}</p>
-              <LevelBadge level={level} />
+              <div className="flex items-center gap-2">
+                <LevelBadge level={level} />
+                <Chip>
+                  {CATEGORY_EMOJI[current.category]} {current.category}
+                </Chip>
+              </div>
             </div>
             <Timer
               remaining={countdown.remaining}
@@ -83,7 +99,7 @@ export default function WoordenwebGame() {
             />
           </>
         ) : (
-          <p className="text-muted">Geen woorden voor dit niveau.</p>
+          <p className="text-muted">Geen woorden met deze filters.</p>
         )}
       </Card>
 
@@ -110,8 +126,7 @@ export default function WoordenwebGame() {
                 visibility_off
               </span>
               {remaining} ongezien
-            </Chip>{' '}
-            op niveau {level}.
+            </Chip>
           </span>
         )}
       </div>
