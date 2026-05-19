@@ -15,7 +15,7 @@ export function AppShell() {
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
           {isHome ? <span className="w-[72px]" aria-hidden="true" /> : <BackButton />}
           <Link to="/" aria-label="Naar startpagina">
-            <img src="/Gilde-Logo-768x141.webp" alt="Gilde" className="h-7 w-auto" />
+            <img src="/Gilde-Logo-768x141.webp" alt="Gilde" className="h-10 w-auto" />
           </Link>
           <div className="flex w-[72px] items-center justify-end gap-1">
             <button
