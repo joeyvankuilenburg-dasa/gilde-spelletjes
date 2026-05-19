@@ -22,7 +22,7 @@ export function AppShell() {
             <span className="material-symbols-rounded text-[22px] text-accent" aria-hidden="true">
               translate
             </span>
-            <span className="text-lg">GSSL Spelletjes</span>
+            <span className="text-lg">Taalspelletjes</span>
           </Link>
           <div className="flex w-[72px] items-center justify-end gap-1">
             <button
