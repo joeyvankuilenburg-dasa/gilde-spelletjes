@@ -19,9 +19,11 @@ export function AppShell() {
             className="flex items-center gap-2 font-bold tracking-tight text-primary"
             aria-label="Naar startpagina"
           >
-            <span className="material-symbols-rounded text-[22px] text-accent" aria-hidden="true">
-              translate
-            </span>
+            <img
+              src="/Gilde-Logo-768x141.webp"
+              alt="Gilde"
+              className="h-7 w-auto"
+            />
             <span className="text-lg">Taalspelletjes</span>
           </Link>
           <div className="flex w-[72px] items-center justify-end gap-1">
