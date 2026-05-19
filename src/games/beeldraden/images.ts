@@ -44,4 +44,31 @@ export const IMAGE_PROMPTS: ImagePrompt[] = [
     hintCaption:
       'Een zwarte fiets leunt tegen een paal op een geplaveide Amsterdamse straat, met grachtenpanden op de achtergrond.',
   },
+  {
+    id: 'img-a1-bushalte',
+    src: '/images/beeldraden/a1-bushalte.webp',
+    alt: 'Een vrouw zit op een bankje in een bushalte en wacht op de bus',
+    levels: ['A1', 'A2'],
+    category: 'Buurt',
+    hintCaption:
+      'Een vrouw zit op een bankje in een glazen bushalte en kijkt naar het digitale bord met de bustijden. In de verte komt een blauw-witte bus aanrijden.',
+  },
+  {
+    id: 'img-a2-markt',
+    src: '/images/beeldraden/a2-markt.webp',
+    alt: 'Een drukke markt met kramen en veel mensen tussen de stalletjes',
+    levels: ['A2', 'B1'],
+    category: 'Buurt',
+    hintCaption:
+      'Een drukke buitenmarkt met veel mensen die tussen de kramen lopen. De stalletjes verkopen groente, fruit, kaas en vis. Op de achtergrond staat een kerktoren.',
+  },
+  {
+    id: 'img-b1-gracht',
+    src: '/images/beeldraden/b1-gracht.webp',
+    alt: 'Een Amsterdamse gracht met boten, bomen en oude grachtenpanden',
+    levels: ['B1', 'B2'],
+    category: 'Buurt',
+    hintCaption:
+      'Een zonnige Amsterdamse gracht met woonboten en kleine bootjes op het water. Langs de kant staan bomen en oude grachtenpanden, en op de achtergrond is een brug te zien.',
+  },
 ];
