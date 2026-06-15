@@ -9,6 +9,8 @@ export default {
         'primary-fg': 'hsl(var(--gssl-primary-fg) / <alpha-value>)',
         accent: 'hsl(var(--gssl-accent) / <alpha-value>)',
         'accent-fg': 'hsl(var(--gssl-accent-fg) / <alpha-value>)',
+        joy: 'hsl(var(--gssl-joy) / <alpha-value>)',
+        'joy-fg': 'hsl(var(--gssl-joy-fg) / <alpha-value>)',
         bg: 'hsl(var(--gssl-bg) / <alpha-value>)',
         surface: 'hsl(var(--gssl-surface) / <alpha-value>)',
         ink: 'hsl(var(--gssl-text) / <alpha-value>)',
@@ -16,10 +18,10 @@ export default {
         border: 'hsl(var(--gssl-border) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['"Atkinson Hyperlegible"', 'system-ui', 'sans-serif'],
+        sans: ['"Nunito"', '"Atkinson Hyperlegible"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        card: '14px',
+        card: '20px',
       },
       minHeight: {
         tap: '48px',

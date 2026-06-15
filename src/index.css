@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Fris & Strak – GSSL brand tokens ───────────────────────────────────── */
+/* ─── Speels & Vriendelijk – GSSL brand tokens ───────────────────────────── */
 :root {
-  --gssl-primary: 213 68% 32%;
+  --gssl-primary: 213 70% 38%;
   --gssl-primary-fg: 0 0% 100%;
-  --gssl-accent: 170 63% 46%;
+  --gssl-primary-shade: 213 70% 28%;
+  --gssl-accent: 170 65% 44%;
   --gssl-accent-fg: 0 0% 100%;
-  --gssl-bg: 214 36% 96%;
+  --gssl-accent-shade: 170 65% 32%;
+  --gssl-joy: 38 92% 56%;
+  --gssl-joy-fg: 24 70% 18%;
+  --gssl-joy-shade: 32 80% 42%;
+  --gssl-bg: 214 50% 97%;
   --gssl-surface: 0 0% 100%;
   --gssl-text: 213 34% 15%;
   --gssl-muted: 213 20% 52%;
   --gssl-border: 213 28% 89%;
 
-  --shadow-card: 0 2px 12px rgba(27, 79, 138, 0.07), 0 0 0 1px rgba(27, 79, 138, 0.07);
-  --shadow-card-hover: 0 6px 24px rgba(27, 79, 138, 0.13), 0 0 0 2px rgba(43, 191, 160, 0.45);
+  --shadow-card: 0 4px 18px rgba(27, 79, 138, 0.09), 0 0 0 1px rgba(27, 79, 138, 0.05);
+  --shadow-card-hover: 0 8px 28px rgba(27, 79, 138, 0.14), 0 0 0 2px rgba(43, 191, 160, 0.45);
   --shadow-die: 0 8px 32px rgba(27, 79, 138, 0.18);
   --shadow-die-rolling: 0 8px 40px rgba(43, 191, 160, 0.35), 0 0 0 3px rgba(43, 191, 160, 0.3);
 }
@@ -24,8 +29,13 @@
 [data-theme='dark'] {
   --gssl-primary: 213 70% 60%;
   --gssl-primary-fg: 0 0% 100%;
+  --gssl-primary-shade: 213 70% 40%;
   --gssl-accent: 170 55% 52%;
   --gssl-accent-fg: 0 0% 100%;
+  --gssl-accent-shade: 170 55% 36%;
+  --gssl-joy: 38 85% 60%;
+  --gssl-joy-fg: 24 70% 18%;
+  --gssl-joy-shade: 32 75% 44%;
   --gssl-bg: 213 30% 10%;
   --gssl-surface: 213 28% 15%;
   --gssl-text: 213 15% 92%;
@@ -51,10 +61,44 @@ body,
 body {
   @apply bg-bg text-ink antialiased;
   font-family:
+    'Nunito',
     'Atkinson Hyperlegible',
     system-ui,
     -apple-system,
     sans-serif;
+}
+
+/* Chunky button: bottom shadow geeft een tastbaar push-effect. */
+.chunky-btn {
+  position: relative;
+  box-shadow: 0 5px 0 hsl(var(--gssl-primary-shade));
+  transition:
+    transform 90ms ease,
+    box-shadow 90ms ease,
+    background-color 150ms ease;
+}
+.chunky-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 hsl(var(--gssl-primary-shade));
+}
+.chunky-btn--accent {
+  box-shadow: 0 5px 0 hsl(var(--gssl-accent-shade));
+}
+.chunky-btn--accent:active {
+  box-shadow: 0 2px 0 hsl(var(--gssl-accent-shade));
+}
+.chunky-btn--joy {
+  box-shadow: 0 5px 0 hsl(var(--gssl-joy-shade));
+}
+.chunky-btn--joy:active {
+  box-shadow: 0 2px 0 hsl(var(--gssl-joy-shade));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chunky-btn,
+  .chunky-btn:active {
+    transform: none;
+  }
 }
 
 *:focus-visible {
