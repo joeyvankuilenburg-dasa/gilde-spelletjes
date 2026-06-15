@@ -16,7 +16,7 @@ export function SamExplains({ title = 'Sam legt het uit', intro, steps }: SamExp
         ✦
       </span>
       <div className="flex shrink-0 flex-col items-center gap-1">
-        <SamAvatar className="h-16 w-16" />
+        <SamAvatar className="h-24 w-24 sm:h-28 sm:w-28" />
         <span className="text-[10px] font-extrabold uppercase tracking-widest text-muted">
           Sam
         </span>
