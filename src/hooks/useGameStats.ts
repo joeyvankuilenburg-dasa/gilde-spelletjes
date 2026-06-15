@@ -3,10 +3,10 @@ import { loadStats, saveStats } from '../lib/sam/storage';
 import { emitSam } from '../lib/sam/events';
 import { bigTotalPhrase, milestonePhrase, BIG_TOTAL_MILESTONES } from '../lib/sam/phrases';
 
-const PER_GAME_STEP = 10;
+const DEFAULT_STEP = 10;
 
 export function useGameStats() {
-  const recordRound = useCallback((gameId: string) => {
+  const recordRound = useCallback((gameId: string, step: number = DEFAULT_STEP) => {
     const stats = loadStats();
     const nextPerGame = (stats.perGame[gameId] ?? 0) + 1;
     const nextTotal = stats.total + 1;
@@ -26,9 +26,9 @@ export function useGameStats() {
       return;
     }
 
-    // Per-game milestone every PER_GAME_STEP rounds.
+    // Per-game milestone every `step` rounds.
     const lastPerGame = stats.lastMilestonePerGame[gameId] ?? 0;
-    if (nextPerGame % PER_GAME_STEP === 0 && nextPerGame > lastPerGame) {
+    if (nextPerGame % step === 0 && nextPerGame > lastPerGame) {
       updated.lastMilestonePerGame = {
         ...stats.lastMilestonePerGame,
         [gameId]: nextPerGame,

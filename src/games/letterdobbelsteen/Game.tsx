@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card } from '../../components/ui/Card';
 import { GameTagBadge } from '../../components/ui/Badge';
 import { SamExplains } from '../../components/SamExplains';
+import { useGameStats } from '../../hooks/useGameStats';
 import { Die } from './Die';
 import type { DieFace } from './faces';
 import { ModeSelector } from './ModeSelector';
@@ -15,9 +16,11 @@ export default function LetterDobbelsteenGame() {
   const [mode, setMode] = useState<SubMode>(SUB_MODES[0]!);
   const [theme, setTheme] = useState<DiceTheme>(THEMES[0]!);
   const [lastFace, setLastFace] = useState<DieFace | null>(null);
+  const { recordRound } = useGameStats();
 
   const handleRoll = (face: DieFace) => {
     setLastFace(face);
+    recordRound('letterdobbelsteen', 5);
   };
 
   const handleSelectMode = (next: SubMode) => {
