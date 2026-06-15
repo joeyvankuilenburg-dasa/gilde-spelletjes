@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GameCard } from '../components/GameCard';
+import { SamGreeting } from '../components/SamGreeting';
 import { Chip } from '../components/ui/Badge';
 import { GAMES } from '../games';
 import type { GameTag } from '../games/types';
@@ -26,6 +27,9 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-6">
+      {/* Sam zegt hallo */}
+      <SamGreeting />
+
       {/* Verras me */}
       <button
         type="button"
