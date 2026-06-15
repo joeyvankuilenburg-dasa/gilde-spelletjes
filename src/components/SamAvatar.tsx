@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import { cn } from '../lib/cn';
 
+export type SamVariant = 'default' | 'celebrate';
+
 interface SamAvatarProps {
   className?: string;
+  variant?: SamVariant;
 }
 
-const SAM_SRC = '/images/sam/sam.webp';
+const SOURCES: Record<SamVariant, string> = {
+  default: '/images/sam/sam.webp',
+  celebrate: '/images/sam/sam-thumbsup.webp',
+};
 
 /**
  * Sam, de mascotte van Gilde SamenSpraak Leiden.
- * Houdt de Leidse sleutels vast (verwijzing naar het stadswapen).
- * Valt terug op een eenvoudige SVG zolang de illustratie niet beschikbaar is.
+ * - default: Sam met de Leidse sleutels (voor uitleg en algemene weergave).
+ * - celebrate: Sam met duim omhoog (voor mijlpalen en set-completion).
+ * Valt terug op een eenvoudige SVG zolang de illustratie ontbreekt.
  */
-export function SamAvatar({ className }: SamAvatarProps) {
+export function SamAvatar({ className, variant = 'default' }: SamAvatarProps) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -21,7 +28,7 @@ export function SamAvatar({ className }: SamAvatarProps) {
 
   return (
     <img
-      src={SAM_SRC}
+      src={SOURCES[variant]}
       alt=""
       onError={() => setFailed(true)}
       className={cn('object-contain', className)}
@@ -30,7 +37,7 @@ export function SamAvatar({ className }: SamAvatarProps) {
   );
 }
 
-function FallbackSam({ className }: SamAvatarProps) {
+function FallbackSam({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 160 160"

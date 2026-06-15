@@ -63,7 +63,7 @@ export function Sam() {
           </span>
         </button>
         <div className="flex flex-col items-center gap-4 text-center">
-          <SamAvatar className="h-28 w-28" />
+          <SamAvatar variant="celebrate" className="h-32 w-32" />
           <div className="rounded-2xl bg-primary/10 px-4 py-3">
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Sam</p>
             <p className="mt-1 text-lg font-bold text-ink">{active.message}</p>
