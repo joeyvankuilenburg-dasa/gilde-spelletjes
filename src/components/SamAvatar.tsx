@@ -1,10 +1,36 @@
+import { useState } from 'react';
+import { cn } from '../lib/cn';
+
 interface SamAvatarProps {
   className?: string;
 }
 
-// Placeholder until a real Sam illustration is delivered.
-// Friendly round figure with a waving hand.
+const SAM_SRC = '/images/sam/sam.webp';
+
+/**
+ * Sam, de mascotte van Gilde SamenSpraak Leiden.
+ * Houdt de Leidse sleutels vast (verwijzing naar het stadswapen).
+ * Valt terug op een eenvoudige SVG zolang de illustratie niet beschikbaar is.
+ */
 export function SamAvatar({ className }: SamAvatarProps) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return <FallbackSam className={className} />;
+  }
+
+  return (
+    <img
+      src={SAM_SRC}
+      alt=""
+      onError={() => setFailed(true)}
+      className={cn('object-contain', className)}
+      aria-hidden="true"
+    />
+  );
+}
+
+function FallbackSam({ className }: SamAvatarProps) {
   return (
     <svg
       viewBox="0 0 160 160"
@@ -27,15 +53,6 @@ export function SamAvatar({ className }: SamAvatarProps) {
         d="M58 98 Q80 116 102 98"
         stroke="#1a1a2e"
         strokeWidth="5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <circle cx="50" cy="100" r="5" fill="#ff8585" opacity="0.55" />
-      <circle cx="110" cy="100" r="5" fill="#ff8585" opacity="0.55" />
-      <path
-        d="M132 60 Q146 50 142 36 Q138 24 124 28"
-        stroke="hsl(var(--gssl-primary))"
-        strokeWidth="9"
         strokeLinecap="round"
         fill="none"
       />
