@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { CategoryFilter, CATEGORY_EMOJI } from '../../components/CategoryFilter';
+import { SamExplains } from '../../components/SamExplains';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -282,22 +283,7 @@ export default function SituatiesGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <Card className="p-4">
-        <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
-          Hoe werkt het?
-        </p>
-        <ul className="flex flex-col gap-1.5">
-          {situatiesGame.howToPlay.map((step, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-ink">
-              <span
-                aria-hidden="true"
-                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-              />
-              {step}
-            </li>
-          ))}
-        </ul>
-      </Card>
+      <SamExplains steps={situatiesGame.howToPlay} />
     </div>
   );
 }
