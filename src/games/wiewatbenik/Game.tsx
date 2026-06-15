@@ -4,6 +4,8 @@ import { Card } from '../../components/ui/Card';
 import { GameTagBadge, Chip } from '../../components/ui/Badge';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
+import { useGameStats } from '../../hooks/useGameStats';
+import { useSetCompletion } from '../../hooks/useSetCompletion';
 import { cn } from '../../lib/cn';
 import { wieWatBenIkGame } from './meta';
 import { WIEWAT_CARDS } from './data';
@@ -31,6 +33,8 @@ export default function WieWatBenIkGame() {
     [activeCategory],
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
+  const { recordRound } = useGameStats();
+  useSetCompletion(`wiewatbenik:${activeCategory ?? 'all'}`, remaining, filtered.length);
 
   useEffect(() => {
     if (filtered.length > 0) pick();
@@ -40,7 +44,10 @@ export default function WieWatBenIkGame() {
   const handleNext = (wasGuessed: boolean) => {
     void wasGuessed;
     setRevealed(false);
-    flip(pick);
+    flip(() => {
+      pick();
+      recordRound('wiewatbenik');
+    });
   };
 
   return (

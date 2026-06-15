@@ -8,6 +8,8 @@ import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
 import { useCountdown } from '../../hooks/useCountdown';
+import { useGameStats } from '../../hooks/useGameStats';
+import { useSetCompletion } from '../../hooks/useSetCompletion';
 import { cn } from '../../lib/cn';
 import { type TopicCategory } from '../../types/content';
 import { woordenwebGame } from './meta';
@@ -30,6 +32,8 @@ export default function WoordenwebGame() {
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
   const countdown = useCountdown(TIMER_SECONDS);
+  const { recordRound } = useGameStats();
+  useSetCompletion(`woordenweb:${level}:${activeCategory ?? 'all'}`, remaining, filtered.length);
 
   useEffect(() => {
     if (filtered.length > 0) pick();
@@ -43,7 +47,10 @@ export default function WoordenwebGame() {
   }, [current?.id]);
 
   const handleNext = () => {
-    flip(pick);
+    flip(() => {
+      pick();
+      recordRound('woordenweb');
+    });
   };
 
   return (

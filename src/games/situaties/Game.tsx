@@ -7,6 +7,8 @@ import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
+import { useGameStats } from '../../hooks/useGameStats';
+import { useSetCompletion } from '../../hooks/useSetCompletion';
 import { cn } from '../../lib/cn';
 import { type TopicCategory } from '../../types/content';
 import { situatiesGame } from './meta';
@@ -25,6 +27,8 @@ export default function SituatiesGame() {
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
+  const { recordRound } = useGameStats();
+  useSetCompletion(`situaties:${level}:${activeCategory ?? 'all'}`, remaining, filtered.length);
   const [tipsShownA, setTipsShownA] = useState(false);
   const [tipsShownB, setTipsShownB] = useState(false);
   const [pickedRole, setPickedRole] = useState<'A' | 'B' | null>(null);
@@ -258,7 +262,7 @@ export default function SituatiesGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(pick)}
+          onClick={() => flip(() => { pick(); recordRound('situaties'); })}
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">

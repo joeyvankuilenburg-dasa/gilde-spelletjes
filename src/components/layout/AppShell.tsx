@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { BackButton } from './BackButton';
+import { Sam } from '../Sam';
 import { useTheme } from '../../hooks/useTheme';
 import { useOnboarding } from '../../hooks/useOnboarding';
 
@@ -51,6 +52,7 @@ export function AppShell() {
       <footer className="mx-auto w-full max-w-3xl px-4 py-6 text-center text-sm text-muted">
         Gemaakt voor Gilde SamenSpraak Leiden
       </footer>
+      <Sam />
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
+import { useGameStats } from '../../hooks/useGameStats';
+import { useSetCompletion } from '../../hooks/useSetCompletion';
 import { cn } from '../../lib/cn';
 import { type TopicCategory } from '../../types/content';
 import { beeldradenGame } from './meta';
@@ -21,6 +23,8 @@ export default function BeeldradenGame() {
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
+  const { recordRound } = useGameStats();
+  useSetCompletion(`beeldraden:${activeCategory ?? 'all'}`, remaining, filtered.length);
   const [hintShown, setHintShown] = useState(false);
 
   useEffect(() => {
@@ -102,7 +106,7 @@ export default function BeeldradenGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(pick)}
+          onClick={() => flip(() => { pick(); recordRound('beeldraden'); })}
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">

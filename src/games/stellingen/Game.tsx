@@ -7,6 +7,8 @@ import { LevelBadge, Chip, GameTagBadge } from '../../components/ui/Badge';
 import { useLevelFilter } from '../../hooks/useLevelFilter';
 import { useNoRepeatPicker } from '../../hooks/useNoRepeatPicker';
 import { useCardFlip } from '../../hooks/useCardFlip';
+import { useGameStats } from '../../hooks/useGameStats';
+import { useSetCompletion } from '../../hooks/useSetCompletion';
 import { cn } from '../../lib/cn';
 import { type TopicCategory } from '../../types/content';
 import { stellingenGame } from './meta';
@@ -25,6 +27,8 @@ export default function StellingenGame() {
   );
   const { current, pick, remaining } = useNoRepeatPicker(filtered);
   const { phase, flip } = useCardFlip();
+  const { recordRound } = useGameStats();
+  useSetCompletion(`stellingen:${level}:${activeCategory ?? 'all'}`, remaining, filtered.length);
 
   useEffect(() => {
     if (filtered.length > 0) pick();
@@ -79,7 +83,7 @@ export default function StellingenGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(pick)}
+          onClick={() => flip(() => { pick(); recordRound('stellingen'); })}
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
