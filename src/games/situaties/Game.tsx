@@ -95,9 +95,7 @@ export default function SituatiesGame() {
 
             {/* Rollen */}
             <div className="flex flex-col gap-1.5">
-              <p className="text-xs font-bold uppercase tracking-widest text-muted">
-                Kies je rol
-              </p>
+              <p className="text-xs font-bold uppercase tracking-widest text-muted">Kies je rol</p>
               <div className="flex flex-col gap-2">
                 {/* Rol A */}
                 {(['A', 'B'] as const).map((rol) => {
@@ -157,19 +155,13 @@ export default function SituatiesGame() {
                           <p
                             className={cn(
                               'font-bold',
-                              picked
-                                ? isA
-                                  ? 'text-primary-fg'
-                                  : 'text-accent-fg'
-                                : 'text-ink',
+                              picked ? (isA ? 'text-primary-fg' : 'text-accent-fg') : 'text-ink',
                             )}
                           >
                             {roleLabel}
                           </p>
                         </div>
-                        {!picked && (
-                          <span className="text-xs font-bold text-muted">Kies</span>
-                        )}
+                        {!picked && <span className="text-xs font-bold text-muted">Kies</span>}
                       </button>
                       {current.tips && current.tips.length > 0 && (
                         <div className="px-3 pb-3">
@@ -263,7 +255,12 @@ export default function SituatiesGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(() => { pick(); recordRound('situaties'); })}
+          onClick={() =>
+            flip(() => {
+              pick();
+              recordRound('situaties');
+            })
+          }
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">

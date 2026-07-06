@@ -84,7 +84,12 @@ export default function StellingenGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(() => { pick(); recordRound('stellingen'); })}
+          onClick={() =>
+            flip(() => {
+              pick();
+              recordRound('stellingen');
+            })
+          }
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">

@@ -8,7 +8,13 @@ export type GameId =
   | 'situaties'
   | 'woordenweb'
   | 'wiewatbenik'
-  | 'spreekwoorden';
+  | 'spreekwoorden'
+  | 'ai-gesprek'
+  | 'oefenvragen'
+  | 'promptkaarten'
+  | 'nazeggen'
+  | 'uitspraakoefening'
+  | 'taal-slam';
 
 export type GameTag =
   | 'Spreken'
@@ -16,7 +22,10 @@ export type GameTag =
   | 'Beschrijven'
   | 'Raden'
   | 'Rollenspel'
-  | 'Woordenschat';
+  | 'Woordenschat'
+  | 'Zelf oefenen'
+  | 'Uitspraak'
+  | 'Creatief';
 
 export interface Game {
   id: GameId;

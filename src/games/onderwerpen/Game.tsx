@@ -84,7 +84,12 @@ export default function OnderwerpenGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(() => { pick(); recordRound('onderwerpen'); })}
+          onClick={() =>
+            flip(() => {
+              pick();
+              recordRound('onderwerpen');
+            })
+          }
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">

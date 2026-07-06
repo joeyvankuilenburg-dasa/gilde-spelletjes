@@ -22,11 +22,7 @@ const NIGHT = [
   'Hallo nachtuil! Welk spel doen we?',
   'Stil uurtje? Perfect voor wat oefenen.',
 ];
-const RETURNING_SUFFIX = [
-  'Fijn dat je terug bent!',
-  'Leuk je weer te zien!',
-  'Welkom terug!',
-];
+const RETURNING_SUFFIX = ['Fijn dat je terug bent!', 'Leuk je weer te zien!', 'Welkom terug!'];
 
 function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -57,10 +53,7 @@ export function SamGreeting() {
 
   return (
     <div className="relative flex items-center gap-3 rounded-card bg-surface p-4 shadow-card">
-      <span
-        aria-hidden="true"
-        className="absolute -right-1 -top-2 text-2xl text-joy drop-shadow"
-      >
+      <span aria-hidden="true" className="absolute -right-1 -top-2 text-2xl text-joy drop-shadow">
         ✦
       </span>
       <SamAvatar className="h-20 w-20 shrink-0 sm:h-24 sm:w-24" />

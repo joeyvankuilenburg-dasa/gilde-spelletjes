@@ -13,6 +13,9 @@ const TAGS: GameTag[] = [
   'Raden',
   'Rollenspel',
   'Woordenschat',
+  'Zelf oefenen',
+  'Uitspraak',
+  'Creatief',
 ];
 
 export default function HomePage() {

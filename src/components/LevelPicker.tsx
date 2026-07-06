@@ -8,7 +8,12 @@ interface LevelPickerProps {
   comingSoonLevels?: Level[];
 }
 
-export function LevelPicker({ value, onChange, className, comingSoonLevels = [] }: LevelPickerProps) {
+export function LevelPicker({
+  value,
+  onChange,
+  className,
+  comingSoonLevels = [],
+}: LevelPickerProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       <span className="text-xs font-bold uppercase tracking-widest text-muted">Taalniveau</span>
@@ -28,7 +33,7 @@ export function LevelPicker({ value, onChange, className, comingSoonLevels = [] 
               aria-checked={selected}
               onClick={() => onChange(level)}
               className={cn(
-                'min-h-tap min-w-tap relative flex flex-1 flex-col items-center justify-center rounded-lg px-4 py-1 text-base font-bold transition-all duration-150',
+                'relative flex min-h-tap min-w-tap flex-1 flex-col items-center justify-center rounded-lg px-4 py-1 text-base font-bold transition-all duration-150',
                 selected
                   ? 'bg-primary text-primary-fg shadow-sm'
                   : 'text-muted hover:bg-surface hover:text-ink',

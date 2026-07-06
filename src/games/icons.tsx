@@ -67,3 +67,27 @@ export function QuoteIcon({ className }: IconProps) {
     </span>
   );
 }
+
+export function CardsIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      style
+    </span>
+  );
+}
+
+export function RecordVoiceIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      record_voice_over
+    </span>
+  );
+}
+
+export function HearingIcon({ className }: IconProps) {
+  return (
+    <span className={cn('material-symbols-rounded', className)} aria-hidden="true">
+      hearing
+    </span>
+  );
+}

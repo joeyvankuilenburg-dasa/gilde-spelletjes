@@ -1,16 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { cn } from '../lib/cn';
 
-export type SamVariant = 'default' | 'celebrate';
+export type SamVariant =
+  | 'default'
+  | 'celebrate'
+  | 'thinking'
+  | 'listening'
+  | 'encouragement'
+  | 'notebook'
+  | 'dance';
 
 interface SamAvatarProps {
   className?: string;
   variant?: SamVariant;
 }
 
-const SOURCES: Record<SamVariant, string> = {
-  default: '/images/sam/sam.webp',
-  celebrate: '/images/sam/sam-thumbsup.webp',
+const FRAMES: Record<SamVariant, string[]> = {
+  default: [
+    '/mascot/notebook/notebook-01.webp',
+    '/mascot/notebook/notebook-02.webp',
+    '/mascot/notebook/notebook-03.webp',
+    '/mascot/notebook/notebook-04.webp',
+    '/mascot/notebook/notebook-05.webp',
+    '/mascot/notebook/notebook-06.webp',
+  ],
+  notebook: [
+    '/mascot/notebook/notebook-01.webp',
+    '/mascot/notebook/notebook-02.webp',
+    '/mascot/notebook/notebook-03.webp',
+    '/mascot/notebook/notebook-04.webp',
+    '/mascot/notebook/notebook-05.webp',
+    '/mascot/notebook/notebook-06.webp',
+  ],
+  celebrate: [
+    '/mascot/dance/dance-01.webp',
+    '/mascot/dance/dance-02.webp',
+    '/mascot/dance/dance-03.webp',
+    '/mascot/dance/dance-04.webp',
+    '/mascot/dance/dance-05.webp',
+    '/mascot/dance/dance-06.webp',
+    '/mascot/dance/dance-07.webp',
+    '/mascot/dance/dance-08.webp',
+  ],
+  dance: [
+    '/mascot/dance/dance-01.webp',
+    '/mascot/dance/dance-02.webp',
+    '/mascot/dance/dance-03.webp',
+    '/mascot/dance/dance-04.webp',
+    '/mascot/dance/dance-05.webp',
+    '/mascot/dance/dance-06.webp',
+    '/mascot/dance/dance-07.webp',
+    '/mascot/dance/dance-08.webp',
+  ],
+  thinking: [
+    '/mascot/thinking/thinking-01.webp',
+    '/mascot/thinking/thinking-02.webp',
+    '/mascot/thinking/thinking-03.webp',
+    '/mascot/thinking/thinking-04.webp',
+  ],
+  listening: [
+    '/mascot/listening/listening-01.webp',
+    '/mascot/listening/listening-02.webp',
+    '/mascot/listening/listening-03.webp',
+    '/mascot/listening/listening-04.webp',
+    '/mascot/listening/listening-05.webp',
+    '/mascot/listening/listening-06.webp',
+  ],
+  encouragement: [
+    '/mascot/encouragement/encouragement-01.webp',
+    '/mascot/encouragement/encouragement-02.webp',
+    '/mascot/encouragement/encouragement-03.webp',
+    '/mascot/encouragement/encouragement-04.webp',
+  ],
 };
 
 /**
@@ -21,6 +82,23 @@ const SOURCES: Record<SamVariant, string> = {
  */
 export function SamAvatar({ className, variant = 'default' }: SamAvatarProps) {
   const [failed, setFailed] = useState(false);
+  const [frameIndex, setFrameIndex] = useState(0);
+  const frames = useMemo(() => FRAMES[variant], [variant]);
+
+  useEffect(() => {
+    setFrameIndex(0);
+    setFailed(false);
+  }, [variant]);
+
+  useEffect(() => {
+    if (frames.length <= 1) return undefined;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return undefined;
+    const interval = window.setInterval(() => {
+      setFrameIndex((value) => (value + 1) % frames.length);
+    }, 160);
+    return () => window.clearInterval(interval);
+  }, [frames]);
 
   if (failed) {
     return <FallbackSam className={className} />;
@@ -28,7 +106,7 @@ export function SamAvatar({ className, variant = 'default' }: SamAvatarProps) {
 
   return (
     <img
-      src={SOURCES[variant]}
+      src={frames[frameIndex] ?? frames[0]}
       alt=""
       onError={() => setFailed(true)}
       className={cn('object-contain', className)}
