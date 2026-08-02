@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { SamExplains } from '../../components/SamExplains';
+import { useMascot } from '../../components/practice/mascot';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge } from '../../components/ui/Badge';
@@ -12,6 +13,7 @@ import {
   getRepeatWords,
   type PracticeFeedback,
 } from '../../lib/practice/oefenvragen';
+import { speakDutch } from '../../lib/speech/voice';
 import type {
   ISpeechRecognition,
   SpeechRecognitionErrorEvent,
@@ -32,6 +34,7 @@ export default function OefenvragenGame() {
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   const questions = useMemo(() => {
     void round;
@@ -69,13 +72,12 @@ export default function OefenvragenGame() {
     (text: string) => {
       if (!('speechSynthesis' in window) || !text.trim()) return;
       stopSpeaking();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'nl-NL';
-      utterance.rate = 0.92;
-      utterance.onend = () => setSpeaking(false);
-      utterance.onerror = () => setSpeaking(false);
       setSpeaking(true);
-      window.speechSynthesis.speak(utterance);
+      speakDutch(text, {
+        rate: 0.92,
+        onEnd: () => setSpeaking(false),
+        onError: () => setSpeaking(false),
+      });
     },
     [stopSpeaking],
   );
@@ -102,10 +104,12 @@ export default function OefenvragenGame() {
     recognition.onend = () => {
       setRecording(false);
       setInterim('');
+      mascot.stop('listening');
     };
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       setRecording(false);
       setInterim('');
+      mascot.stop('listening');
       if (event.error === 'not-allowed') {
         setError('Microfoon geblokkeerd. Typ je antwoord of sta microfoontoegang toe.');
       } else if (event.error !== 'no-speech' && event.error !== 'aborted') {
@@ -115,25 +119,40 @@ export default function OefenvragenGame() {
     recognitionRef.current = recognition;
     recognition.start();
     setRecording(true);
-  }, []);
+    mascot.play({ variant: 'listening', announcement: 'Ik luister naar je.', loop: true });
+  }, [mascot]);
 
   const stopRecording = useCallback(() => {
     recognitionRef.current?.stop();
     setRecording(false);
     setInterim('');
-  }, []);
+    mascot.stop('listening');
+  }, [mascot]);
 
   function submitAnswer() {
     if (!currentQuestion) return;
     const text = answer.trim();
     if (!text) {
       setError('Geef eerst een antwoord.');
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
       return;
     }
     const nextFeedback = generateRulesFeedback(text, repeatWords, currentQuestion.prompt);
     setFeedback(nextFeedback);
     setError(null);
     recordRound('oefenvragen');
+
+    // Een correctie betekent "nog even oefenen", anders een compliment in het notitieblok.
+    if (nextFeedback.correction) {
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1600 });
+    } else {
+      mascot.play({
+        variant: 'notebook',
+        announcement: 'Goed gesproken!',
+        notebookMessage: 'Goed gesproken!',
+        holdFinalMs: 1800,
+      });
+    }
   }
 
   function nextQuestion() {

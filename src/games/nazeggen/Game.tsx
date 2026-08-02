@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { SamExplains } from '../../components/SamExplains';
+import { useMascot } from '../../components/practice/mascot';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge, LevelBadge } from '../../components/ui/Badge';
 import { useGameStats } from '../../hooks/useGameStats';
 import { readStorage, writeStorage } from '../../lib/storage';
+import { speakDutch } from '../../lib/speech/voice';
 import { SHADOWING_SENTENCES, type ShadowingSentence } from '../../lib/practice/content';
 import { nazeggenGame } from './meta';
 
@@ -81,9 +83,9 @@ export default function NazeggenGame() {
   });
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<BlobPart[]>([]);
-  const dutchVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
   const ttsAudioRef = useRef<HTMLAudioElement | null>(null);
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   const sentences = SHADOWING_SENTENCES.filter((sentence) => sentence.level === level);
   const selected =
@@ -95,22 +97,7 @@ export default function NazeggenGame() {
 
   useEffect(() => {
     setRecordingAvailable('MediaRecorder' in window && !!navigator.mediaDevices?.getUserMedia);
-    if ('speechSynthesis' in window) {
-      const findDutchVoice = () => {
-        const voices = window.speechSynthesis.getVoices();
-        dutchVoiceRef.current =
-          voices.find((voice) => voice.lang === 'nl-NL') ??
-          voices.find((voice) => voice.lang.startsWith('nl')) ??
-          null;
-      };
-      findDutchVoice();
-      window.speechSynthesis.addEventListener('voiceschanged', findDutchVoice);
-      return () => {
-        window.speechSynthesis.removeEventListener('voiceschanged', findDutchVoice);
-        window.speechSynthesis.cancel();
-      };
-    }
-    return undefined;
+    return () => window.speechSynthesis?.cancel();
   }, []);
 
   useEffect(() => {
@@ -148,13 +135,7 @@ export default function NazeggenGame() {
     const audio = new Audio(`/audio/shadowing/${sentence.id}.mp3`);
     ttsAudioRef.current = audio;
     audio.play().catch(() => {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(sentence.sentence);
-        utterance.lang = 'nl-NL';
-        utterance.rate = 0.86;
-        if (dutchVoiceRef.current) utterance.voice = dutchVoiceRef.current;
-        window.speechSynthesis.speak(utterance);
-      }
+      speakDutch(sentence.sentence, { rate: 0.86 });
     });
   }
 
@@ -175,17 +156,21 @@ export default function NazeggenGame() {
         if (audioUrl) URL.revokeObjectURL(audioUrl);
         setAudioUrl(URL.createObjectURL(blob));
         setAttempts((value) => Math.max(value + 1, 1));
+        mascot.stop('listening');
       };
       recorder.start();
       setRecording(true);
+      mascot.play({ variant: 'listening', announcement: 'Ik luister naar je zin.', loop: true });
     } catch {
       setMessage('Microfoon opnemen lukt niet. Je kunt de zin hardop oefenen zonder opname.');
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
     }
   }
 
   function stopRecording() {
     recorderRef.current?.stop();
     setRecording(false);
+    mascot.stop('listening');
   }
 
   function save(status: ShadowingStatus) {
@@ -195,6 +180,17 @@ export default function NazeggenGame() {
     writeStorage(STORAGE_KEY, next);
     setMessage('Nazeggen opgeslagen in deze browser.');
     recordRound('nazeggen');
+
+    if (status === 'practiced') {
+      mascot.play({
+        variant: 'notebook',
+        announcement: 'Mooie zin!',
+        notebookMessage: 'Mooie zin!',
+        holdFinalMs: 1800,
+      });
+    } else {
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1600 });
+    }
   }
 
   if (!selected) {

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { LevelPicker } from '../../components/LevelPicker';
 import { SamExplains } from '../../components/SamExplains';
+import { useMascot } from '../../components/practice/mascot';
+import { speakDutch } from '../../lib/speech/voice';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge, LevelBadge } from '../../components/ui/Badge';
@@ -77,9 +79,9 @@ export default function UitspraakoefeningGame() {
   const [sessionCorrect, setSessionCorrect] = useState(0);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<BlobPart[]>([]);
-  const dutchVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
   const ttsAudioRef = useRef<HTMLAudioElement | null>(null);
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   const themes = useMemo(() => getThemesForLevel(level), [level]);
   const totalWords = useMemo(() => getWordsByLevelAndTheme(level, theme).length, [level, theme]);
@@ -92,22 +94,7 @@ export default function UitspraakoefeningGame() {
 
   useEffect(() => {
     setRecordingAvailable('MediaRecorder' in window && !!navigator.mediaDevices?.getUserMedia);
-    if ('speechSynthesis' in window) {
-      const findDutchVoice = () => {
-        const voices = window.speechSynthesis.getVoices();
-        dutchVoiceRef.current =
-          voices.find((voice) => voice.lang === 'nl-NL') ??
-          voices.find((voice) => voice.lang.startsWith('nl')) ??
-          null;
-      };
-      findDutchVoice();
-      window.speechSynthesis.addEventListener('voiceschanged', findDutchVoice);
-      return () => {
-        window.speechSynthesis.removeEventListener('voiceschanged', findDutchVoice);
-        window.speechSynthesis.cancel();
-      };
-    }
-    return undefined;
+    return () => window.speechSynthesis?.cancel();
   }, []);
 
   useEffect(() => {
@@ -189,13 +176,7 @@ export default function UitspraakoefeningGame() {
     const audio = new Audio(`/audio/pronunciation/${word.id}.mp3`);
     ttsAudioRef.current = audio;
     audio.play().catch(() => {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(word.ttsText ?? word.word);
-        utterance.lang = 'nl-NL';
-        utterance.rate = 0.75;
-        if (dutchVoiceRef.current) utterance.voice = dutchVoiceRef.current;
-        window.speechSynthesis.speak(utterance);
-      }
+      speakDutch(word.ttsText ?? word.word, { rate: 0.75 });
     });
   }
 
@@ -214,17 +195,25 @@ export default function UitspraakoefeningGame() {
         stream.getTracks().forEach((track) => track.stop());
         const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
         setAudioUrl(URL.createObjectURL(blob));
+        mascot.stop('listening');
       };
       recorder.start();
       setRecording(true);
+      mascot.play({
+        variant: 'listening',
+        announcement: 'Ik luister naar je uitspraak.',
+        loop: true,
+      });
     } catch {
       setRecordingAvailable(false);
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
     }
   }
 
   function stopRecording() {
     recorderRef.current?.stop();
     setRecording(false);
+    mascot.stop('listening');
   }
 
   function advanceWord() {
@@ -242,6 +231,26 @@ export default function UitspraakoefeningGame() {
     persist(next);
     if (status === 'mastered') setSessionCorrect((value) => value + 1);
     recordRound('uitspraakoefening');
+
+    const isLastWord = wordIndex + 1 >= session.length;
+    if (isLastWord) {
+      mascot.play({
+        variant: 'dance',
+        announcement: 'Sessie klaar. Goed gedaan!',
+        cycles: 2,
+        holdFinalMs: 700,
+      });
+    } else if (status === 'mastered') {
+      mascot.play({
+        variant: 'notebook',
+        announcement: 'Goed gesproken!',
+        notebookMessage: 'Goed gesproken!',
+        holdFinalMs: 1600,
+      });
+    } else {
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
+    }
+
     advanceWord();
   }
 

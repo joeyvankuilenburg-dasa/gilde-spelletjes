@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useMascot } from '../../components/practice/mascot';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { LevelBadge } from '../../components/ui/Badge';
@@ -101,8 +102,9 @@ export function ExpressionQuiz() {
   const [round, setRound] = useState(0);
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
-  const [score, setScore] = useState({ answered: 0, correct: 0 });
+  const [score, setScore] = useState({ answered: 0, correct: 0, streak: 0 });
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   const deck = useMemo<(FinishQuestion | MeaningQuestion)[]>(() => {
     void round;
@@ -117,35 +119,64 @@ export function ExpressionQuiz() {
     setRound((value) => value + 1);
     setIndex(0);
     setPicked(null);
-    setScore({ answered: 0, correct: 0 });
+    setScore({ answered: 0, correct: 0, streak: 0 });
   }
 
   function changeMode(nextMode: QuizMode) {
     setMode(nextMode);
     setIndex(0);
     setPicked(null);
-    setScore({ answered: 0, correct: 0 });
+    setScore({ answered: 0, correct: 0, streak: 0 });
   }
 
   function changeLevel(nextLevel: LevelFilter) {
     setLevel(nextLevel);
     setIndex(0);
     setPicked(null);
-    setScore({ answered: 0, correct: 0 });
+    setScore({ answered: 0, correct: 0, streak: 0 });
   }
 
   function pick(option: string) {
     if (!question || answered) return;
     const right = option === question.correct;
+    const nextStreak = right ? score.streak + 1 : 0;
     setPicked(option);
     setScore((value) => ({
       answered: value.answered + 1,
       correct: value.correct + (right ? 1 : 0),
+      streak: right ? value.streak + 1 : 0,
     }));
     recordRound('spreekwoorden');
+
+    if (!right) {
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
+    } else if (nextStreak === 3) {
+      mascot.play({
+        variant: 'dance',
+        announcement: 'Drie op rij!',
+        cycles: 1,
+        holdFinalMs: 500,
+      });
+    } else {
+      mascot.play({
+        variant: 'notebook',
+        announcement: 'Mooie zin!',
+        notebookMessage: 'Mooie zin!',
+        holdFinalMs: 1800,
+      });
+    }
   }
 
   function next() {
+    if (index + 1 >= deck.length) {
+      mascot.play({
+        variant: 'dance',
+        announcement: 'Oefening klaar. Goed gedaan!',
+        priority: 4,
+        cycles: 2,
+        holdFinalMs: 700,
+      });
+    }
     setPicked(null);
     setIndex((value) => value + 1);
   }
@@ -189,11 +220,18 @@ export function ExpressionQuiz() {
               ))}
             </select>
           </label>
-          <div className="text-right">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted">Score</p>
-            <p className="text-sm font-bold text-ink">
-              {score.correct} / {score.answered}
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <p className="text-xs font-bold uppercase tracking-widest text-muted">Score</p>
+              <p className="text-sm font-bold text-ink">
+                {score.correct} / {score.answered}
+              </p>
+            </div>
+            {score.streak >= 2 && (
+              <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-700">
+                🔥 {score.streak}
+              </span>
+            )}
           </div>
         </div>
       </Card>

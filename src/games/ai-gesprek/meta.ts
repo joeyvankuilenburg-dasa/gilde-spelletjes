@@ -13,7 +13,7 @@ export const aiGesprekGame: Game = {
   howToPlay: [
     'Kies een onderwerp op jouw niveau.',
     'Typ of spreek een bericht in het Nederlands.',
-    'Lees of beluister het korte antwoord van Sam.',
+    'Lees het korte antwoord van Sam en lees het hardop terug.',
     'Begin opnieuw wanneer je een ander onderwerp wilt oefenen.',
   ],
   icon: ChatIcon,

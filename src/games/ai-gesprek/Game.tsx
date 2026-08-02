@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SamExplains } from '../../components/SamExplains';
+import { useMascot } from '../../components/practice/mascot';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { GameTagBadge, LevelBadge } from '../../components/ui/Badge';
@@ -93,11 +94,11 @@ export default function AIGesprekGame() {
   const [interim, setInterim] = useState('');
   const [speechAvailable, setSpeechAvailable] = useState(false);
   const [recording, setRecording] = useState(false);
-  const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   useEffect(() => {
     setSpeechAvailable(!!(window.SpeechRecognition ?? window.webkitSpeechRecognition));
@@ -110,7 +111,6 @@ export default function AIGesprekGame() {
       }
     }
     return () => {
-      window.speechSynthesis?.cancel();
       try {
         recognitionRef.current?.stop();
       } catch {
@@ -124,46 +124,20 @@ export default function AIGesprekGame() {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [topic, messages]);
 
-  const stopSpeaking = useCallback(() => {
-    window.speechSynthesis?.cancel();
-    setSpeakingId(null);
+  const startTopic = useCallback((nextTopic: ConversationTopic) => {
+    const opener: ChatMessage = {
+      id: `a-${Date.now()}`,
+      role: 'assistant',
+      content: nextTopic.opener,
+    };
+    setTopic(nextTopic);
+    setMessages([opener]);
+    setInput('');
+    setInterim('');
+    setError(null);
   }, []);
 
-  const speak = useCallback(
-    (id: string, text: string) => {
-      if (!('speechSynthesis' in window) || !text.trim()) return;
-      stopSpeaking();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'nl-NL';
-      utterance.rate = 0.9;
-      utterance.onend = () => setSpeakingId(null);
-      utterance.onerror = () => setSpeakingId(null);
-      setSpeakingId(id);
-      window.speechSynthesis.speak(utterance);
-    },
-    [stopSpeaking],
-  );
-
-  const startTopic = useCallback(
-    (nextTopic: ConversationTopic) => {
-      stopSpeaking();
-      const opener: ChatMessage = {
-        id: `a-${Date.now()}`,
-        role: 'assistant',
-        content: nextTopic.opener,
-      };
-      setTopic(nextTopic);
-      setMessages([opener]);
-      setInput('');
-      setInterim('');
-      setError(null);
-      setTimeout(() => speak(opener.id, opener.content), 120);
-    },
-    [speak, stopSpeaking],
-  );
-
   const resetTopic = useCallback(() => {
-    stopSpeaking();
     try {
       recognitionRef.current?.stop();
       window.localStorage.removeItem(STORAGE_KEY);
@@ -176,7 +150,7 @@ export default function AIGesprekGame() {
     setInterim('');
     setError(null);
     setRecording(false);
-  }, [stopSpeaking]);
+  }, []);
 
   const sendMessage = useCallback(
     (textArg?: string) => {
@@ -187,10 +161,15 @@ export default function AIGesprekGame() {
         return;
       }
 
-      stopSpeaking();
       setError(null);
       setRecording(false);
       setInterim('');
+      mascot.stop('listening');
+      mascot.play({
+        variant: 'thinking',
+        announcement: 'Ik denk na over mijn antwoord.',
+        holdFinalMs: 600,
+      });
       const userMessage: ChatMessage = { id: `u-${Date.now()}`, role: 'user', content: text };
       const history = [...messages, userMessage];
       const reply = generateConversationReply({
@@ -206,9 +185,8 @@ export default function AIGesprekGame() {
       setMessages([...history, assistantMessage]);
       setInput('');
       recordRound('ai-gesprek');
-      setTimeout(() => speak(assistantMessage.id, assistantMessage.content), 120);
     },
-    [input, messages, recordRound, speak, stopSpeaking, topic],
+    [input, mascot, messages, recordRound, topic],
   );
 
   const startRecording = useCallback(() => {
@@ -233,10 +211,12 @@ export default function AIGesprekGame() {
     recognition.onend = () => {
       setRecording(false);
       setInterim('');
+      mascot.stop('listening');
     };
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       setRecording(false);
       setInterim('');
+      mascot.stop('listening');
       if (event.error === 'not-allowed') {
         setError('Microfoon geblokkeerd. Sta microfoontoegang toe of typ je bericht.');
       } else if (event.error !== 'no-speech' && event.error !== 'aborted') {
@@ -246,13 +226,15 @@ export default function AIGesprekGame() {
     recognitionRef.current = recognition;
     recognition.start();
     setRecording(true);
-  }, []);
+    mascot.play({ variant: 'listening', announcement: 'Ik luister naar je.', loop: true });
+  }, [mascot]);
 
   const stopRecording = useCallback(() => {
     recognitionRef.current?.stop();
     setRecording(false);
     setInterim('');
-  }, []);
+    mascot.stop('listening');
+  }, [mascot]);
 
   const visibleTopics = CONVERSATION_TOPICS.filter(
     (item) => levelFilter === 'all' || item.level === levelFilter,
@@ -372,22 +354,6 @@ export default function AIGesprekGame() {
                 )}
               >
                 <p className="whitespace-pre-wrap">{message.content}</p>
-                {message.role === 'assistant' && 'speechSynthesis' in window && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      speakingId === message.id
-                        ? stopSpeaking()
-                        : speak(message.id, message.content)
-                    }
-                    className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-muted hover:text-primary"
-                  >
-                    <span className="material-symbols-rounded text-[15px]" aria-hidden="true">
-                      {speakingId === message.id ? 'stop' : 'volume_up'}
-                    </span>
-                    {speakingId === message.id ? 'Stop' : 'Lees voor'}
-                  </button>
-                )}
               </div>
             </div>
           ))}

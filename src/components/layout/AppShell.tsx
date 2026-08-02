@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { BackButton } from './BackButton';
 import { Sam } from '../Sam';
+import { MascotProvider } from '../practice/mascot';
 import { useTheme } from '../../hooks/useTheme';
 import { useOnboarding } from '../../hooks/useOnboarding';
 
@@ -47,7 +48,14 @@ export function AppShell() {
         </div>
       </header>
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
-        <Outlet />
+        {/* Op de startpagina begroet SamGreeting al; daar hoeft de mascotte niet mee te zweven. */}
+        {isHome ? (
+          <Outlet />
+        ) : (
+          <MascotProvider>
+            <Outlet />
+          </MascotProvider>
+        )}
       </main>
       <footer className="mx-auto w-full max-w-3xl px-4 py-6 text-center text-sm text-muted">
         Gemaakt voor Gilde SamenSpraak Leiden

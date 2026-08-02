@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SamExplains } from '../../components/SamExplains';
+import { useMascot } from '../../components/practice/mascot';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';
 import { Chip, GameTagBadge, LevelBadge } from '../../components/ui/Badge';
@@ -151,6 +152,7 @@ export default function TaalSlamGame() {
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<BlobPart[]>([]);
   const { recordRound } = useGameStats();
+  const mascot = useMascot();
 
   const challengeMode = mode === 'menu' ? 'finish' : mode;
   const deck = useMemo(() => {
@@ -225,17 +227,21 @@ export default function TaalSlamGame() {
         stream.getTracks().forEach((track) => track.stop());
         const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
         setAudioUrl(URL.createObjectURL(blob));
+        mascot.stop('listening');
       };
       recorder.start();
       setRecording(true);
+      mascot.play({ variant: 'listening', announcement: 'Ik luister naar je slam.', loop: true });
     } catch {
       setRecordingAvailable(false);
+      mascot.play({ variant: 'encouragement', announcement: 'Blijf oefenen!', holdFinalMs: 1400 });
     }
   }
 
   function stopRecording() {
     recorderRef.current?.stop();
     setRecording(false);
+    mascot.stop('listening');
   }
 
   function requestTips() {
@@ -250,6 +256,11 @@ export default function TaalSlamGame() {
     });
     setTips(result);
     recordRound('taal-slam');
+    mascot.play({
+      variant: 'thinking',
+      announcement: 'Ik denk na over je slam.',
+      holdFinalMs: 900,
+    });
   }
 
   if (mode === 'menu') {
