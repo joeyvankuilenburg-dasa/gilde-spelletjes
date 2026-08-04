@@ -1,6 +1,6 @@
 # GSSL Spelletjes
 
-Web app met spelletjes voor **Gilde SamenSpraak Leiden** — bedoeld voor taalmaatjes en anderstaligen om samen een gesprek op gang te brengen. Geen account, geen internet-afhankelijke services: een statische app die op telefoon of laptop draait.
+Web app met spelletjes voor **Gilde SamenSpraak Leiden** — bedoeld voor taalmaatjes en anderstaligen om samen een gesprek op gang te brengen. Er zijn geen accounts of databases. De app draait ook zonder AI-configuratie; AI-gesprek valt dan terug op ingebouwde gespreksregels.
 
 ## Spelletjes
 
@@ -27,6 +27,26 @@ npm run check        # tsc + eslint + prettier (CI-check)
 ```
 
 Node 20+ vereist.
+
+## AI-gesprek configureren
+
+De browser stuurt gesprekken uitsluitend naar de eigen Netlify Function op `/api/chat`. De
+API-sleutel blijft server-side en wordt nooit in de Vite-bundle of localStorage geplaatst.
+
+1. Kopieer `.env.example` naar `.env`.
+2. Kies `AI_PROVIDER=gemini` of `AI_PROVIDER=openai-compatible`.
+3. Vul `AI_API_KEY`, `AI_MODEL` en zo nodig `AI_BASE_URL` in.
+4. Voeg dezelfde variabelen toe in de Netlify-site-instellingen voor productie.
+
+Gemini werkt via Googles OpenAI-compatibele endpoint. Een andere aanbieder werkt zonder
+codewijziging als die de gebruikelijke `/chat/completions`-response ondersteunt. Zonder geldige
+configuratie, bij time-outs of bij providerfouten gebruikt de app automatisch de lokale regels.
+
+Gebruik `npx netlify dev` om de Function en een echte provider lokaal te testen. De gewone
+`npm run dev` start alleen Vite; het gesprek blijft daar via de lokale fallback bruikbaar.
+
+Gebruik nooit `VITE_AI_API_KEY` of een ander `VITE_`-voorvoegsel voor geheimen: Vite maakt zulke
+waarden openbaar in de browser.
 
 ## Structuur
 

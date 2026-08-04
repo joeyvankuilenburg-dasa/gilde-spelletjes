@@ -52,15 +52,15 @@ export function SamGreeting() {
   }, []);
 
   return (
-    <div className="relative flex items-center gap-3 rounded-card bg-surface p-4 shadow-card">
+    <div className="relative flex flex-col items-center gap-3 rounded-card bg-surface p-4 shadow-card sm:flex-row">
       <span aria-hidden="true" className="absolute -right-1 -top-2 text-2xl text-joy drop-shadow">
         ✦
       </span>
-      <SamAvatar className="h-20 w-20 shrink-0 sm:h-24 sm:w-24" />
-      <div className="relative flex-1 rounded-2xl bg-primary/10 px-4 py-3">
+      <SamAvatar className="h-40 w-40 shrink-0 sm:h-48 sm:w-48" />
+      <div className="relative w-full flex-1 rounded-2xl bg-primary/10 px-4 py-3">
         <span
           aria-hidden="true"
-          className="absolute -left-2 top-5 h-4 w-4 rotate-45 bg-primary/10"
+          className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-primary/10 sm:-left-2 sm:top-5 sm:translate-x-0"
         />
         <p className="text-xs font-extrabold uppercase tracking-widest text-primary">Sam</p>
         <p className="mt-1 text-base font-bold leading-snug text-ink">{greeting}</p>

@@ -9,6 +9,8 @@ import {
   type ReactNode,
 } from 'react';
 import { cn } from '../../lib/cn';
+import { MASCOT_SPRITES, type MascotSpriteName } from '../mascotSprites';
+import { MascotSprite } from '../MascotSprite';
 
 /**
  * Sam als reagerende mascotte naast de oefening.
@@ -22,28 +24,20 @@ export type MascotVariant = 'notebook' | 'dance' | 'listening' | 'thinking' | 'e
 export type MascotPriority = 1 | 2 | 3 | 4;
 
 interface MascotManifest {
-  frames: readonly string[];
+  frameCount: number;
   frameDurationMs: number;
+  sprite: MascotSpriteName;
   /** Vanaf dit frame is het notitieblok leesbaar en tonen we de tekst erin. */
   messageFrame?: number;
 }
 
-function framePaths(variant: MascotVariant, count: number): string[] {
-  return Array.from(
-    { length: count },
-    (_, index) => `/mascot/${variant}/${variant}-${String(index + 1).padStart(2, '0')}.webp`,
-  );
-}
-
 export const MASCOT_MANIFESTS: Record<MascotVariant, MascotManifest> = {
-  notebook: { frames: framePaths('notebook', 6), frameDurationMs: 210, messageFrame: 5 },
-  dance: { frames: framePaths('dance', 8), frameDurationMs: 140 },
-  listening: { frames: framePaths('listening', 6), frameDurationMs: 210 },
-  thinking: { frames: framePaths('thinking', 4), frameDurationMs: 260 },
-  encouragement: { frames: framePaths('encouragement', 4), frameDurationMs: 230 },
+  notebook: { sprite: 'notebook', frameCount: 6, frameDurationMs: 210, messageFrame: 5 },
+  dance: { sprite: 'dance', frameCount: 8, frameDurationMs: 140 },
+  listening: { sprite: 'listening', frameCount: 6, frameDurationMs: 210 },
+  thinking: { sprite: 'thinking', frameCount: 4, frameDurationMs: 260 },
+  encouragement: { sprite: 'encouragement', frameCount: 4, frameDurationMs: 230 },
 };
-
-const IDLE_FRAME = MASCOT_MANIFESTS.encouragement.frames[0]!;
 
 export interface MascotRequest {
   variant: MascotVariant;
@@ -147,7 +141,7 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    void preloadFrames(Object.values(MASCOT_MANIFESTS).flatMap((manifest) => manifest.frames));
+    void preloadFrames(Object.values(MASCOT_SPRITES).map((manifest) => manifest.src));
   }, []);
 
   useEffect(() => {
@@ -167,14 +161,14 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
 
     const activeEvent = event;
     const manifest = MASCOT_MANIFESTS[activeEvent.variant];
-    const finalFrame = manifest.frames.length - 1;
+    const finalFrame = manifest.frameCount - 1;
     let cancelled = false;
     let frameTimer: ReturnType<typeof setInterval> | null = null;
     let holdTimer: ReturnType<typeof setTimeout> | null = null;
 
     setReady(false);
 
-    void preloadFrames(manifest.frames).then(() => {
+    void preloadFrame(MASCOT_SPRITES[manifest.sprite].src).then(() => {
       if (cancelled) return;
       setReady(true);
 
@@ -219,14 +213,15 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
   }, [event, onComplete, reducedMotion]);
 
   const manifest = event ? MASCOT_MANIFESTS[event.variant] : null;
-  const visibleFrame = event && ready && manifest ? manifest.frames[frameIndex]! : IDLE_FRAME;
+  const visibleSprite = event && ready && manifest ? manifest.sprite : 'encouragement';
+  const visibleFrameIndex = event && ready && manifest ? frameIndex : 0;
   const showNotebookMessage = Boolean(
     event &&
-      manifest &&
-      ready &&
-      event.variant === 'notebook' &&
-      event.notebookMessage &&
-      frameIndex >= (manifest.messageFrame ?? manifest.frames.length - 1),
+    manifest &&
+    ready &&
+    event.variant === 'notebook' &&
+    event.notebookMessage &&
+    frameIndex >= (manifest.messageFrame ?? manifest.frameCount - 1),
   );
 
   return (
@@ -241,12 +236,10 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
         event ? 'scale-105' : 'scale-100 opacity-90',
       )}
     >
-      <img
-        key={visibleFrame}
-        src={visibleFrame}
-        alt=""
-        aria-hidden="true"
-        className="h-full w-full select-none object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.18)]"
+      <MascotSprite
+        sprite={visibleSprite}
+        frameIndex={visibleFrameIndex}
+        className="h-full w-full select-none drop-shadow-[0_6px_16px_rgba(0,0,0,0.18)]"
       />
 
       <p

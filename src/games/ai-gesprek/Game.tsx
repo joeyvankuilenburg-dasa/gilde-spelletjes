@@ -6,6 +6,7 @@ import { Card } from '../../components/ui/Card';
 import { GameTagBadge, LevelBadge } from '../../components/ui/Badge';
 import { useGameStats } from '../../hooks/useGameStats';
 import { cn } from '../../lib/cn';
+import { requestConversationReply } from '../../lib/practice/conversation/api';
 import {
   CONVERSATION_TOPICS,
   GESPREK_LEVELS,
@@ -94,6 +95,7 @@ export default function AIGesprekGame() {
   const [interim, setInterim] = useState('');
   const [speechAvailable, setSpeechAvailable] = useState(false);
   const [recording, setRecording] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
@@ -153,8 +155,8 @@ export default function AIGesprekGame() {
   }, []);
 
   const sendMessage = useCallback(
-    (textArg?: string) => {
-      if (!topic) return;
+    async (textArg?: string) => {
+      if (!topic || sending) return;
       const text = (textArg ?? input).trim();
       if (!text) {
         setError('Typ of spreek eerst een bericht.');
@@ -172,21 +174,30 @@ export default function AIGesprekGame() {
       });
       const userMessage: ChatMessage = { id: `u-${Date.now()}`, role: 'user', content: text };
       const history = [...messages, userMessage];
-      const reply = generateConversationReply({
+      const context = {
         topicId: topic.id,
         level: topic.level,
         history: history.map((message) => ({ role: message.role, content: message.content })),
-      });
-      const assistantMessage: ChatMessage = {
-        id: `a-${Date.now()}`,
-        role: 'assistant',
-        content: reply,
       };
-      setMessages([...history, assistantMessage]);
+      setMessages(history);
       setInput('');
-      recordRound('ai-gesprek');
+      setSending(true);
+
+      try {
+        const apiReply = await requestConversationReply(context);
+        const reply = apiReply?.reply ?? generateConversationReply(context);
+        const assistantMessage: ChatMessage = {
+          id: `a-${Date.now()}`,
+          role: 'assistant',
+          content: reply,
+        };
+        setMessages([...history, assistantMessage]);
+        recordRound('ai-gesprek');
+      } finally {
+        setSending(false);
+      }
     },
-    [input, mascot, messages, recordRound, topic],
+    [input, mascot, messages, recordRound, sending, topic],
   );
 
   const startRecording = useCallback(() => {
@@ -260,7 +271,8 @@ export default function AIGesprekGame() {
         <Card className="p-4">
           <p className="text-sm font-bold text-ink">Kies een onderwerp</p>
           <p className="mt-1 text-sm text-muted">
-            Sam antwoordt met vaste gespreksregels in deze browser. Er gaat niets naar een server.
+            Sam gebruikt online AI als die is ingesteld. Zonder API of verbinding schakelt hij
+            automatisch over op de ingebouwde gespreksregels.
           </p>
         </Card>
 
@@ -330,7 +342,7 @@ export default function AIGesprekGame() {
           </span>
           <div className="min-w-0">
             <p className="truncate text-sm font-bold text-ink">{topic.label}</p>
-            <p className="text-xs text-muted">Niveau {topic.level} · lokaal gesprek</p>
+            <p className="text-xs text-muted">Niveau {topic.level} · AI met lokale fallback</p>
           </div>
         </div>
         <Button variant="secondary" onClick={resetTopic} className="shrink-0 px-3 text-sm">
@@ -357,6 +369,13 @@ export default function AIGesprekGame() {
               </div>
             </div>
           ))}
+          {sending && (
+            <div className="flex justify-start">
+              <p className="rounded-2xl rounded-bl-sm bg-bg px-3.5 py-2 text-sm text-muted">
+                Sam denkt na...
+              </p>
+            </div>
+          )}
           <div ref={endRef} />
         </div>
 
@@ -372,7 +391,7 @@ export default function AIGesprekGame() {
               value={composedInput}
               onChange={(event) => setInput(event.target.value)}
               rows={1}
-              disabled={recording}
+              disabled={recording || sending}
               placeholder={recording ? 'Aan het luisteren...' : 'Typ je bericht in het Nederlands'}
               className="min-h-tap flex-1 resize-none rounded-xl border border-border bg-bg px-3 py-2 text-sm text-ink focus:border-primary"
             />
@@ -394,7 +413,7 @@ export default function AIGesprekGame() {
             <button
               type="button"
               onClick={() => sendMessage()}
-              disabled={recording || !composedInput.trim()}
+              disabled={recording || sending || !composedInput.trim()}
               aria-label="Verstuur bericht"
               className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-fg transition-colors hover:bg-primary/95 disabled:opacity-50"
             >
