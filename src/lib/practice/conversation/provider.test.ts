@@ -59,4 +59,19 @@ describe('requestOpenAiCompatibleReply', () => {
       'geen bruikbaar antwoord',
     );
   });
+
+  it('laat optionele samplingparameters weg wanneer de provider die niet ondersteunt', async () => {
+    const fetcher = vi.fn(async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      return new Response(
+        JSON.stringify({ choices: [{ message: { content: 'Prima antwoord.' } }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
+      );
+    });
+
+    const { temperature: _temperature, ...configWithoutTemperature } = CONFIG;
+    await requestOpenAiCompatibleReply(configWithoutTemperature, CONVERSATION, fetcher);
+
+    const [, init] = fetcher.mock.calls[0]!;
+    expect(JSON.parse(String(init?.body))).not.toHaveProperty('temperature');
+  });
 });

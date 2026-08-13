@@ -41,6 +41,8 @@ API-sleutel blijft server-side en wordt nooit in de Vite-bundle of localStorage 
 Gemini werkt via Googles OpenAI-compatibele endpoint. Een andere aanbieder werkt zonder
 codewijziging als die de gebruikelijke `/chat/completions`-response ondersteunt. Zonder geldige
 configuratie, bij time-outs of bij providerfouten gebruikt de app automatisch de lokale regels.
+Voor Gemini 3.6 wordt `temperature` niet meegestuurd, omdat Google deze samplingparameter heeft
+afgeschaft. `AI_TEMPERATURE` blijft optioneel beschikbaar voor andere OpenAI-compatibele aanbieders.
 
 Gebruik `npx netlify dev` om de Function en een echte provider lokaal te testen. De gewone
 `npm run dev` start alleen Vite; het gesprek blijft daar via de lokale fallback bruikbaar.

@@ -7,7 +7,7 @@ export interface ProviderConfig {
   baseUrl: string;
   maxOutputTokens: number;
   model: string;
-  temperature: number;
+  temperature?: number;
   timeoutMs: number;
 }
 
@@ -80,7 +80,7 @@ export async function requestOpenAiCompatibleReply(
           ...conversation.history.slice(-12),
         ],
         max_tokens: config.maxOutputTokens,
-        temperature: config.temperature,
+        ...(config.temperature === undefined ? {} : { temperature: config.temperature }),
       }),
       signal: controller.signal,
     });

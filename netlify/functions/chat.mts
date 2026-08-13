@@ -99,7 +99,7 @@ function providerConfig(provider: Exclude<ProviderName, 'rules'>): ProviderConfi
     model,
     timeoutMs: numberFromEnv('AI_TIMEOUT_MS', 15_000, 1_000, 30_000),
     maxOutputTokens: Math.round(numberFromEnv('AI_MAX_OUTPUT_TOKENS', 220, 50, 1_000)),
-    temperature: numberFromEnv('AI_TEMPERATURE', 0.7, 0, 2),
+    ...(gemini ? {} : { temperature: numberFromEnv('AI_TEMPERATURE', 0.7, 0, 2) }),
   };
 }
 
