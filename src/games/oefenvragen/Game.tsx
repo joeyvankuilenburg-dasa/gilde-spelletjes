@@ -323,7 +323,7 @@ export default function OefenvragenGame() {
         </div>
       )}
 
-      <SamExplains steps={oefenvragenGame.howToPlay} />
+      <SamExplains notebookContext="oefenvragen" steps={oefenvragenGame.howToPlay} />
     </div>
   );
 }

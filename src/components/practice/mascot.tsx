@@ -8,8 +8,15 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { useLocation } from 'react-router-dom';
 import { cn } from '../../lib/cn';
-import { MASCOT_SPRITES, type MascotSpriteName } from '../mascotSprites';
+import {
+  MASCOT_SPRITES,
+  notebookContextForPath,
+  notebookSprite,
+  type MascotSpriteName,
+  type NotebookContext,
+} from '../mascotSprites';
 import { MascotSprite } from '../MascotSprite';
 
 /**
@@ -44,6 +51,7 @@ export interface MascotRequest {
   /** Wordt voorgelezen door schermlezers; bij 'notebook' ook in het blok getoond. */
   announcement: string;
   notebookMessage?: string;
+  notebookContext?: NotebookContext;
   priority?: MascotPriority;
   loop?: boolean;
   cycles?: number;
@@ -136,12 +144,17 @@ interface MascotStageProps {
 }
 
 function MascotStage({ event, onComplete }: MascotStageProps) {
+  const location = useLocation();
   const [frameIndex, setFrameIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    void preloadFrames(Object.values(MASCOT_SPRITES).map((manifest) => manifest.src));
+    void preloadFrames(
+      ['dance', 'listening', 'thinking', 'encouragement'].map(
+        (sprite) => MASCOT_SPRITES[sprite as MascotSpriteName].src,
+      ),
+    );
   }, []);
 
   useEffect(() => {
@@ -168,7 +181,12 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
 
     setReady(false);
 
-    void preloadFrame(MASCOT_SPRITES[manifest.sprite].src).then(() => {
+    const activeSprite =
+      activeEvent.variant === 'notebook'
+        ? notebookSprite(activeEvent.notebookContext ?? notebookContextForPath(location.pathname))
+        : manifest.sprite;
+
+    void preloadFrame(MASCOT_SPRITES[activeSprite].src).then(() => {
       if (cancelled) return;
       setReady(true);
 
@@ -210,10 +228,15 @@ function MascotStage({ event, onComplete }: MascotStageProps) {
       if (frameTimer) clearInterval(frameTimer);
       if (holdTimer) clearTimeout(holdTimer);
     };
-  }, [event, onComplete, reducedMotion]);
+  }, [event, location.pathname, onComplete, reducedMotion]);
 
   const manifest = event ? MASCOT_MANIFESTS[event.variant] : null;
-  const visibleSprite = event && ready && manifest ? manifest.sprite : 'encouragement';
+  const visibleSprite =
+    event && ready && manifest
+      ? event.variant === 'notebook'
+        ? notebookSprite(event.notebookContext ?? notebookContextForPath(location.pathname))
+        : manifest.sprite
+      : 'encouragement';
   const visibleFrameIndex = event && ready && manifest ? frameIndex : 0;
   const showNotebookMessage = Boolean(
     event &&

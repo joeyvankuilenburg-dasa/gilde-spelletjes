@@ -109,7 +109,7 @@ export default function StellingenGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={stellingenGame.howToPlay} />
+      <SamExplains notebookContext="stellingen" steps={stellingenGame.howToPlay} />
     </div>
   );
 }

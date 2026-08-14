@@ -376,7 +376,7 @@ export default function UitspraakoefeningGame() {
           </Button>
         </Card>
 
-        <SamExplains steps={uitspraakoefeningGame.howToPlay} />
+        <SamExplains notebookContext="uitspraakoefening" steps={uitspraakoefeningGame.howToPlay} />
       </div>
     );
   }

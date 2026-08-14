@@ -89,6 +89,7 @@ export default function SpreekwoordenGame() {
         <>
           <ExpressionQuiz />
           <SamExplains
+            notebookContext="uitdrukkingen"
             steps={[
               'Kies of je een uitdrukking wilt afmaken of de betekenis wilt raden.',
               'Lees de zin of letterlijke uitleg rustig hardop.',
@@ -196,7 +197,7 @@ export default function SpreekwoordenGame() {
             </span>
           </div>
 
-          <SamExplains steps={spreekwoordenGame.howToPlay} />
+          <SamExplains notebookContext="spreekwoorden" steps={spreekwoordenGame.howToPlay} />
         </>
       )}
     </div>

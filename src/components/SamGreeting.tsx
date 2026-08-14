@@ -56,7 +56,7 @@ export function SamGreeting() {
       <span aria-hidden="true" className="absolute -right-1 -top-2 text-2xl text-joy drop-shadow">
         ✦
       </span>
-      <SamAvatar className="h-40 w-40 shrink-0 sm:h-48 sm:w-48" />
+      <SamAvatar notebookContext="home" className="h-40 w-40 shrink-0 sm:h-48 sm:w-48" />
       <div className="relative w-full flex-1 rounded-2xl bg-primary/10 px-4 py-3">
         <span
           aria-hidden="true"

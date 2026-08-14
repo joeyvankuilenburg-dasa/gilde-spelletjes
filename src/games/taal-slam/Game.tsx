@@ -306,7 +306,7 @@ export default function TaalSlamGame() {
           />
         </div>
 
-        <SamExplains steps={taalSlamGame.howToPlay} />
+        <SamExplains notebookContext="taal-slam" steps={taalSlamGame.howToPlay} />
       </div>
     );
   }

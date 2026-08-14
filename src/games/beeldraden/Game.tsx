@@ -132,7 +132,7 @@ export default function BeeldradenGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={beeldradenGame.howToPlay} />
+      <SamExplains notebookContext="beeldraden" steps={beeldradenGame.howToPlay} />
     </div>
   );
 }

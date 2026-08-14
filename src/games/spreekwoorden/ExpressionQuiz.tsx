@@ -160,6 +160,7 @@ export function ExpressionQuiz() {
     } else {
       mascot.play({
         variant: 'notebook',
+        notebookContext: 'uitdrukkingen',
         announcement: 'Mooie zin!',
         notebookMessage: 'Mooie zin!',
         holdFinalMs: 1800,

@@ -322,7 +322,7 @@ export default function AIGesprekGame() {
           ))}
         </div>
 
-        <SamExplains steps={aiGesprekGame.howToPlay} />
+        <SamExplains notebookContext="ai-gesprek" steps={aiGesprekGame.howToPlay} />
       </div>
     );
   }

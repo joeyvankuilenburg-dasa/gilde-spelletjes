@@ -280,7 +280,7 @@ export default function SituatiesGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={situatiesGame.howToPlay} />
+      <SamExplains notebookContext="situaties" steps={situatiesGame.howToPlay} />
     </div>
   );
 }

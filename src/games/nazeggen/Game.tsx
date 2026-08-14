@@ -373,7 +373,7 @@ export default function NazeggenGame() {
         </div>
       </Card>
 
-      <SamExplains steps={nazeggenGame.howToPlay} />
+      <SamExplains notebookContext="nazeggen" steps={nazeggenGame.howToPlay} />
     </div>
   );
 }

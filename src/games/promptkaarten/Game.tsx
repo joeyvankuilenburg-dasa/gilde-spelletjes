@@ -257,7 +257,7 @@ export default function PromptkaartenGame() {
 
       {filteredCards.length === 0 && <p className="text-sm text-muted">Geen kaartjes gevonden.</p>}
 
-      <SamExplains steps={promptkaartenGame.howToPlay} />
+      <SamExplains notebookContext="promptkaarten" steps={promptkaartenGame.howToPlay} />
     </div>
   );
 }

@@ -23,6 +23,7 @@ export function MascotSprite({ className, frameIndex, sprite }: MascotSpriteProp
           MASCOT_SPRITE_CLASS[sprite],
         )}
         data-frame={safeFrameIndex}
+        style={{ backgroundImage: `url('${MASCOT_SPRITES[sprite].src}')` }}
       />
     </span>
   );
