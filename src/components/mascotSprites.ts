@@ -1,5 +1,5 @@
 export const NOTEBOOK_CONTEXTS = {
-  home: '/mascot/sheets/notebooks/home.png',
+  home: '/mascot/sheets/notebooks/home-leidse-sleutels-v2.png',
   onderwerpen: '/mascot/sheets/notebooks/onderwerpen.png',
   stellingen: '/mascot/sheets/notebooks/stellingen.png',
   beeldraden: '/mascot/sheets/notebooks/beeldraden.png',

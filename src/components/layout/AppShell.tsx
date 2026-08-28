@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { BackButton } from './BackButton';
 import { Sam } from '../Sam';
 import { MascotProvider } from '../practice/mascot';
@@ -61,6 +61,7 @@ export function AppShell() {
         Gemaakt voor Gilde SamenSpraak Leiden
       </footer>
       <Sam />
+      <ScrollRestoration />
     </div>
   );
 }
