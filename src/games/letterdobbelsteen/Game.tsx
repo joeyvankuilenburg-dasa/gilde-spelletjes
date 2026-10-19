@@ -88,7 +88,7 @@ export default function LetterDobbelsteenGame() {
       </Card>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={letterDobbelsteenGame.howToPlay} />
+      <SamExplains notebookContext="letterdobbelsteen" steps={letterDobbelsteenGame.howToPlay} />
     </div>
   );
 }

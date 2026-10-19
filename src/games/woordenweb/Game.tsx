@@ -140,7 +140,7 @@ export default function WoordenwebGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={woordenwebGame.howToPlay} />
+      <SamExplains notebookContext="woordenweb" steps={woordenwebGame.howToPlay} />
     </div>
   );
 }

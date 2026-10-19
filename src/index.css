@@ -68,6 +68,104 @@ body {
     sans-serif;
 }
 
+/* Sam gebruikt per animatie één samenhangend spriteblad. */
+.mascot-sprite {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+.mascot-sprite--notebook {
+  background-image: url('/mascot/sheets/notebook.png');
+}
+
+.mascot-sprite--dance {
+  background-image: url('/mascot/sheets/dance.png');
+}
+
+.mascot-sprite--listening {
+  background-image: url('/mascot/sheets/listening.png');
+}
+
+.mascot-sprite--thinking {
+  background-image: url('/mascot/sheets/thinking.png');
+}
+
+.mascot-sprite--encouragement {
+  background-image: url('/mascot/sheets/encouragement.png');
+}
+
+.mascot-sprite--3x2 {
+  background-size: 300% 200%;
+}
+
+.mascot-sprite--3x2[data-frame='1'] {
+  background-position: 50% 0;
+}
+
+.mascot-sprite--3x2[data-frame='2'] {
+  background-position: 100% 0;
+}
+
+.mascot-sprite--3x2[data-frame='3'] {
+  background-position: 0 100%;
+}
+
+.mascot-sprite--3x2[data-frame='4'] {
+  background-position: 50% 100%;
+}
+
+.mascot-sprite--3x2[data-frame='5'] {
+  background-position: 100% 100%;
+}
+
+.mascot-sprite--4x2 {
+  background-size: 400% 200%;
+}
+
+.mascot-sprite--4x2[data-frame='1'] {
+  background-position: 33.333% 0;
+}
+
+.mascot-sprite--4x2[data-frame='2'] {
+  background-position: 66.667% 0;
+}
+
+.mascot-sprite--4x2[data-frame='3'] {
+  background-position: 100% 0;
+}
+
+.mascot-sprite--4x2[data-frame='4'] {
+  background-position: 0 100%;
+}
+
+.mascot-sprite--4x2[data-frame='5'] {
+  background-position: 33.333% 100%;
+}
+
+.mascot-sprite--4x2[data-frame='6'] {
+  background-position: 66.667% 100%;
+}
+
+.mascot-sprite--4x2[data-frame='7'] {
+  background-position: 100% 100%;
+}
+
+.mascot-sprite--2x2 {
+  background-size: 200% 200%;
+}
+
+.mascot-sprite--2x2[data-frame='1'] {
+  background-position: 100% 0;
+}
+
+.mascot-sprite--2x2[data-frame='2'] {
+  background-position: 0 100%;
+}
+
+.mascot-sprite--2x2[data-frame='3'] {
+  background-position: 100% 100%;
+}
+
 /* Chunky button: bottom shadow geeft een tastbaar push-effect. */
 .chunky-btn {
   position: relative;

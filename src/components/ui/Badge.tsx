@@ -46,6 +46,9 @@ const tagColors: Record<GameTag, string> = {
   Raden: 'bg-amber-50 text-amber-700',
   Rollenspel: 'bg-rose-50 text-rose-700',
   Woordenschat: 'bg-emerald-50 text-emerald-700',
+  'Zelf oefenen': 'bg-sky-50 text-sky-700',
+  Uitspraak: 'bg-cyan-50 text-cyan-700',
+  Creatief: 'bg-fuchsia-50 text-fuchsia-700',
 };
 
 const tagDots: Record<GameTag, string> = {
@@ -55,6 +58,9 @@ const tagDots: Record<GameTag, string> = {
   Raden: 'bg-amber-500',
   Rollenspel: 'bg-rose-500',
   Woordenschat: 'bg-emerald-500',
+  'Zelf oefenen': 'bg-sky-500',
+  Uitspraak: 'bg-cyan-500',
+  Creatief: 'bg-fuchsia-500',
 };
 
 export function GameTagBadge({ tag, className }: { tag: GameTag; className?: string }) {

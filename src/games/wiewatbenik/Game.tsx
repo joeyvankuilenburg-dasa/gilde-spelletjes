@@ -200,7 +200,7 @@ export default function WieWatBenIkGame() {
       )}
 
       {/* Hoe werkt het */}
-      <SamExplains steps={wieWatBenIkGame.howToPlay} />
+      <SamExplains notebookContext="wiewatbenik" steps={wieWatBenIkGame.howToPlay} />
     </div>
   );
 }

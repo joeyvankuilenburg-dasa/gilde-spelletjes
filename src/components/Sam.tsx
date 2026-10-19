@@ -12,8 +12,14 @@ function fireConfetti(big: boolean) {
   };
   if (big) {
     confetti({ ...baseOptions, particleCount: 160, spread: 100, startVelocity: 45 });
-    setTimeout(() => confetti({ ...baseOptions, particleCount: 80, origin: { x: 0.2, y: 0.7 } }), 200);
-    setTimeout(() => confetti({ ...baseOptions, particleCount: 80, origin: { x: 0.8, y: 0.7 } }), 350);
+    setTimeout(
+      () => confetti({ ...baseOptions, particleCount: 80, origin: { x: 0.2, y: 0.7 } }),
+      200,
+    );
+    setTimeout(
+      () => confetti({ ...baseOptions, particleCount: 80, origin: { x: 0.8, y: 0.7 } }),
+      350,
+    );
   } else {
     confetti({ ...baseOptions, particleCount: 90 });
   }
@@ -45,13 +51,15 @@ export function Sam() {
       role="dialog"
       aria-modal="true"
       aria-label="Sam"
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 p-4 sm:items-center"
-      onClick={() => setActive(null)}
+      className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center"
     >
-      <div
-        className="relative w-full max-w-sm animate-pop rounded-2xl bg-surface p-6 shadow-card"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <button
+        type="button"
+        aria-label="Sluiten"
+        className="absolute inset-0 bg-black/30"
+        onClick={() => setActive(null)}
+      />
+      <div className="relative w-full max-w-sm animate-pop rounded-2xl bg-surface p-6 shadow-card">
         <button
           type="button"
           onClick={() => setActive(null)}

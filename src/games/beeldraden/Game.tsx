@@ -107,7 +107,12 @@ export default function BeeldradenGame() {
         <Button
           variant="accent"
           size="lg"
-          onClick={() => flip(() => { pick(); recordRound('beeldraden'); })}
+          onClick={() =>
+            flip(() => {
+              pick();
+              recordRound('beeldraden');
+            })
+          }
           disabled={filtered.length === 0}
         >
           <span className="material-symbols-rounded text-[22px]" aria-hidden="true">
@@ -127,7 +132,7 @@ export default function BeeldradenGame() {
       </div>
 
       {/* Hoe werkt het */}
-      <SamExplains steps={beeldradenGame.howToPlay} />
+      <SamExplains notebookContext="beeldraden" steps={beeldradenGame.howToPlay} />
     </div>
   );
 }
